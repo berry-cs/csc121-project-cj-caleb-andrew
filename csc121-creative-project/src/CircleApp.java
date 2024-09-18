@@ -1,7 +1,7 @@
 import processing.core.*;
 import processing.event.*;
 
-/**
+/** CJ
  * Provides the scaffolding to launch a Processing application
  */
 public class CircleApp extends PApplet {	// <----- 1. rename AppTemplate everywhere in this file
