@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 /**
  * represents a hand in blackjack, which consists of at least two cards
  *   but at most 11 cards
@@ -32,5 +34,8 @@ public class Hand {
 		this.card11 = card11;
 	}
 
+	Color red = Color.red;
+	Card king = new Card(red, "King", 'K', 10);
+	Hand h1 = new Hand(king, king, king, king, king, king, king, king, king, king, king);
 	
 }
