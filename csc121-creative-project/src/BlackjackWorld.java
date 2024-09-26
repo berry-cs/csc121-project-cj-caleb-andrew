@@ -8,6 +8,7 @@ import processing.core.PApplet;
  * Use mouse clicks to start new game. 
  */
 public class BlackjackWorld implements IWorld{
+	
 	Posn dealerHand;
 	Posn playerHand;
 	Boolean betPlaced;
@@ -55,8 +56,7 @@ public class BlackjackWorld implements IWorld{
 
 
 	/** produce an updates version of this
-	 * world where the dealer has dealt the next card 
-	 * to the player
+	 * world where the dealer has dealt the next card to the player
 	 */
 	public IWorld update() { 
 		if (this.playerHand < 400) {
