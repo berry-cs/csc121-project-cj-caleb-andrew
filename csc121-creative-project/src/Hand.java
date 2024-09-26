@@ -35,7 +35,7 @@ public class Hand implements IWorld {
 	}
 
 	Color red = Color.red;
-	Card king = new Card(red, "King", 'K', 10);
+	Card king = new Card(red, "Hearts", 'K', 10);
 	Hand h1 = new Hand(king, king, king, king, king, king, king, king, king, king, king);
 	
 }

@@ -16,6 +16,6 @@ public class Card {
 		this.value = value;
 	}
 	Color red = Color.red;
-    Card king = new Card(red, "King", 'K', 10);
+    Card king = new Card(red, "Hearts", 'K', 10);
 
 }
