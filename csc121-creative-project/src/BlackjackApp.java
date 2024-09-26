@@ -12,8 +12,9 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 	}
 
 	public void setup() {
-		w = new BlackjackWorld (new Posn (50,50), new Posn (100,100), true); 	// <----- 2. create your initial world object
+		w = new BlackjackWorld (new Hand(), new Hand(), true, 100);	// <----- 2. create your initial world object
 	}
+	
 
 	public void draw() {
 		w = w.update();
