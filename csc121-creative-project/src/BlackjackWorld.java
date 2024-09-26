@@ -2,23 +2,26 @@ import java.util.Objects;
 
 import processing.core.PApplet;
 
-/**
- *  Represent the state of the cards being dealt on the table
+/** Animation with a blackjack card game
+ * Use y or n keys to choose to hit or stand.
+ * Use number keys to input bet amount
+ * Use mouse clicks to start new game. 
  */
-public class BlackjackWorld  implements IWorld{
+public class BlackjackWorld implements IWorld{
+	Posn dealerHand;
+	Posn playerHand;
+	Boolean betPlaced;
 
-	int x;   // the position of the card
-	int y;   // 
-
-	public BlackjackWorld (int x, int y) {
-		super ();
-		this.x = x;
-		this.y = y;		
+	public BlackjackWorld(Posn dealerHand, Posn playerHand, Boolean betPlaced) {
+		super();
+		this.dealerHand = dealerHand;
+		this.playerHand = playerHand;
+		this.betPlaced = betPlaced;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(x, y);
+		return Objects.hash(betPlaced);
 	}
 
 	@Override
@@ -30,17 +33,23 @@ public class BlackjackWorld  implements IWorld{
 		if (getClass() != obj.getClass())
 			return false;
 		BlackjackWorld other = (BlackjackWorld) obj;
-		return x == other.x && y == other.y;
+		return Objects.equals(betPlaced, other.betPlaced);
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "BlackjackWorld [betPlaced=" + betPlaced + "]";
+	}
 
 	/** draw a picture of the cards at this world's (x,y)
 	 * 
 	 */
 	public PApplet draw(PApplet w) { 
 		w.background(255);   // 0 = black, 255 = white
-		w.fill(0,0,255); // solid blue
-		w.circle(this.x, this.y, 15);	
+		w.fill(0,255,0); // solid green
+		w.square(this.dealerHand, this.playerHand, 15);	
 		return w; 
 	}	
 
@@ -50,8 +59,8 @@ public class BlackjackWorld  implements IWorld{
 	 * to the player
 	 */
 	public IWorld update() { 
-		if (this.y < 400) {
-			return new BlackjackWorld (this.x, this.y + 1);
+		if (this.playerHand < 400) {
+			return new BlackjackWorld (this.playerHand, this.playerHand);
 		}else {
 			return this;
 		}
