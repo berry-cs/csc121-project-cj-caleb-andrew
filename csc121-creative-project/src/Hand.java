@@ -5,7 +5,7 @@ import java.awt.Color;
  *   but at most 11 cards
  */
 
-public class Hand {
+public class Hand implements IWorld {
 	Card card1;
 	Card card2;
 	Card card3;
