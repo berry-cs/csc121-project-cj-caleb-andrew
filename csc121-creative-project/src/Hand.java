@@ -39,3 +39,7 @@ public class Hand implements IWorld {
 	Hand h1 = new Hand(king, king, king, king, king, king, king, king, king, king, king);
 	
 }
+
+// restructure to make interface with empty hand or list of cards
+// 1) hit method- adds new card- 
+// 2) stand method- 

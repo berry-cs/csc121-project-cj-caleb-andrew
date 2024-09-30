@@ -3,7 +3,7 @@ import java.awt.Color;
 /**
  * represents a playing card in a deck
  */
-public class Card {
+public class Card implements ILoC{
 	Color color;
 	String suit;
 	char rank;
@@ -19,3 +19,8 @@ public class Card {
     Card king = new Card(red, "King", 'K', 10);
 
 }
+
+
+
+//  1) make method for getting random card
+//  2) 
