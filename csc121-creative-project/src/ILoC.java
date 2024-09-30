@@ -3,7 +3,13 @@
 
 import java.util.Objects;
 
+import processing.core.PApplet;
+
 interface ILoC {
+
+	/* draws this list on the window */
+	PApplet drawCards(PApplet w, Posn loc, boolean spread);
+	
 	// public ??? ilocMethod(...);
 
 	/** adds new random card to list of random cards */
@@ -23,6 +29,11 @@ public ??? ilobMethod(...) {
 ...
 }
 	 */
+	
+	/* draws this list on the window */
+	public PApplet drawCards(PApplet w, Posn loc, boolean spread) {
+		return w;
+	}
 
 	@Override
 	public boolean equals(Object other) {
@@ -49,6 +60,17 @@ class ConsLoC implements ILoC {
 	ConsLoC(Card first, ILoC rest) {
 		this.first = first;
 		this.rest = rest;
+	}
+	
+	/* draws this list on the window */
+	public PApplet drawCards(PApplet w, Posn loc, boolean spread) {
+		this.first.draw(w, loc);
+		if (spread) {
+			this.rest.drawCards(w, loc.translate(new Posn(10, 10)), spread);
+		} else {
+			this.rest.drawCards(w, loc, spread);
+		}
+		return w;
 	}
 
 	@Override
