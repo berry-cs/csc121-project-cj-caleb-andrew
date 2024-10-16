@@ -10,18 +10,14 @@ import processing.core.PApplet;
 public class BlackjackWorld implements IWorld{
 	Hand dealerHand;
 	Hand playerHand;
-<<<<<<< Updated upstream
-
 	Bet bet;
 
 
-=======
+
 	// Bet bet;
 	// ILoC deck;
 
-	boolean betPlaced;
-	int betSize;
->>>>>>> Stashed changes
+
 
 	//int gameStep         // -1 - game over; 0 = dealing initial cards; 1 =waiting for player H/S ; ...
 
@@ -41,11 +37,6 @@ public class BlackjackWorld implements IWorld{
 	}
 
 
-
-
-
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -58,11 +49,6 @@ public class BlackjackWorld implements IWorld{
 		return Objects.equals(bet, other.bet) && Objects.equals(dealerHand, other.dealerHand)
 				&& Objects.equals(playerHand, other.playerHand);
 	}
-
-
-
-
-
 
 
 	@Override

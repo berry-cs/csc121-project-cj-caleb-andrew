@@ -29,9 +29,7 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 				new Hand(new ConsLoC(new Card(Color.BLACK, "Spades", 'T', true),
 						new ConsLoC(new Card(Color.RED, "Diamonds", 'A', true),
 								new MTLoC())),
-						new Posn(250, 325)), true, 100);
-
-		// new Bet (Color.GREEN, true, 100);s
+						new Posn(250, 325)), new Bet (Color.GREEN, true, 100));
 	}
 
 
