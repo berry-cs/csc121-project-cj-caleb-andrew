@@ -7,6 +7,7 @@ public class Bet {
 	boolean betPlaced; // is the bet placed on the table
 	int value;
 
+
 	Bet(Color color, boolean betPlaced, int value) {
 		this.color = color;
 		this.betPlaced = betPlaced;
@@ -14,10 +15,9 @@ public class Bet {
 	}
 
 	/* draw this bet on the given window at the given location */
-	public void draw(PApplet w, Posn betLoc) {
+	public void draw(PApplet w) {
 		w.fill(color.getRGB());
-		w.rectMode(PApplet.CENTER);
-		w.rect(betLoc.getX(), betLoc.getY(), 20, 40);
+		w.circle(40, 360, 40);
 
 
 	}

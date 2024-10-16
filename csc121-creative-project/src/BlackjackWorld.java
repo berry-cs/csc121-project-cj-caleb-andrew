@@ -64,6 +64,7 @@ public class BlackjackWorld implements IWorld{
 
 		this.dealerHand.draw(w);
 		this.playerHand.draw(w);
+		this.bet.draw(w);
 
 		return w; 
 	}	
