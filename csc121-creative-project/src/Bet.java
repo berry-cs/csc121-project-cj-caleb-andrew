@@ -19,6 +19,11 @@ public class Bet {
 		w.fill(color.getRGB());
 		w.circle(40, 360, 40);
 
+		w.fill(0);
+		w.textAlign(w.CENTER);
+		w.text(this.value, 40, 365);
+
+
 
 	}
 
