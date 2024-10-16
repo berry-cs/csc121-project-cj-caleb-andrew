@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 class BlackjackWorldTest {
 	Color red = Color.red;
-	Card king = new Card(red, "Hearts", 'K', 10, true);
-	Hand h1 = new Hand(king);
+	//Card king = new Card(red, "Hearts", 'K', 10, true);
+	//Hand h1 = new Hand(king);
 	
 	// BlackjackWorld w1 = new BlackjackWorld(new Posn(50, 50), new Posn(100, 100));
 	// BlackjackWorld w2 = new BlackjackWorld(new Posn(50, 50), new Posn(98, 98));
