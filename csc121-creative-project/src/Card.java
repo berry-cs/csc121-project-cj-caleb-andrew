@@ -7,7 +7,7 @@ import processing.core.PApplet;
 /**
  * represents a playing card in a deck
  */
-public class Card {
+public class Card implements IWorld {
 	Color color;
 	String suit;
 	char rank;			// 'T' means 10
@@ -30,7 +30,6 @@ public class Card {
 	
 	
 }
-
 
 
 //  1) make method for getting random card

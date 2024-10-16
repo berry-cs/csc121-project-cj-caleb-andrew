@@ -10,7 +10,9 @@ import processing.core.PApplet;
 public class BlackjackWorld implements IWorld{
 	Hand dealerHand;
 	Hand playerHand;
+
 	Bet bet;
+
 
 
 	//int gameStep         // -1 - game over; 0 = dealing initial cards; 1 =waiting for player H/S ; ...
