@@ -15,9 +15,9 @@ class BlackjackWorldTest {
 	// BlackjackWorld w4 = new BlackjackWorld(new Posn(100, 50), new Posn(0, 70));
 
 	@Test
-	void testUpdate() {
-		//assertEquals(w2, w1.update());
-		//assertEquals(w3, w3.update());
+	 void testUpdate() {
+		assertEquals(w2, w1.update());
+		assertEquals(w3, w3.update());
 	}
 
 }

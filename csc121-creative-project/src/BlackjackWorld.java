@@ -10,6 +10,7 @@ import processing.core.PApplet;
 public class BlackjackWorld implements IWorld{
 	Hand dealerHand;
 	Hand playerHand;
+	// Bet bet;
 	// ILoC deck;
 	
 	boolean betPlaced;

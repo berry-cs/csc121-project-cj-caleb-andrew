@@ -2,6 +2,15 @@ import processing.core.*;
 import processing.event.*;
 import java.awt.Color;
 
+
+/* Implement game play logic
+
+1) Add functionality to move cards from a hand to the "table" or from the deck to a hand.
+2) Maybe design a "Button" class(es) to represent actions that should happen.
+3) Make sure test cases are defined and working.
+
+ */
+
 /**
  * Provides the scaffolding to launch a Processing application
  */
@@ -14,15 +23,15 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 
 	public void setup() {
 		w = new BlackjackWorld (new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'K', false),
-											new ConsLoC(new Card(Color.RED, "Hearts", '5', false),
-											new MTLoC())), 
-										 new Posn(200, 50)), 
-							    new Hand(new ConsLoC(new Card(Color.BLACK, "Spades", 'T', true),
-							    			new ConsLoC(new Card(Color.RED, "Diamonds", 'A', true),
-							    					new MTLoC())),
-							    		new Posn(250, 325)), true, 100);	// <----- 2. create your initial world object
+				new ConsLoC(new Card(Color.RED, "Hearts", '5', false),
+						new MTLoC())), 
+				new Posn(200, 50)), 
+				new Hand(new ConsLoC(new Card(Color.BLACK, "Spades", 'T', true),
+						new ConsLoC(new Card(Color.RED, "Diamonds", 'A', true),
+								new MTLoC())),
+						new Posn(250, 325)), true, 100);	
 	}
-	
+
 
 	public void draw() {
 		w = w.update();

@@ -32,6 +32,5 @@ public class Card {
 }
 
 
-
 //  1) make method for getting random card
 //  2) 
