@@ -3,7 +3,7 @@ import java.awt.Color;
 import processing.core.PApplet;
 
 public class Bet {
-	Color color; // red or black chips
+	Color color; // red (or black) chips
 	boolean betPlaced; // is the bet placed on the table
 	int value;
 
