@@ -44,6 +44,9 @@ public class BlackjackWorld implements IWorld{
 		this.playerHand.draw(w);
 		this.bet.draw(w);
 		this.deck.draw(w);
+		
+		w.imageMode(w.CENTER);
+        w.image(w.loadImage("card back updated.png"), this.dealerHand.loc.getX(), this.dealerHand.loc.getY());
 
 		return w; 
 	}	
