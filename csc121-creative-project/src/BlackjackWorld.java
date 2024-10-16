@@ -11,6 +11,7 @@ public class BlackjackWorld implements IWorld{
 	Hand dealerHand;
 	Hand playerHand;
 	Bet bet;
+	Deck deck;
 
 
 	// ILoC deck;
@@ -19,39 +20,16 @@ public class BlackjackWorld implements IWorld{
 
 
 
-	BlackjackWorld(Hand dealerHand, Hand playerHand, Bet bet) {
+	BlackjackWorld(Hand dealerHand, Hand playerHand, Bet bet, Deck deck) {
 		super();
 		this.dealerHand = dealerHand;
 		this.playerHand = playerHand;
 		this.bet = bet;
+		this.deck = deck;
 	}
 
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(bet, dealerHand, playerHand);
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BlackjackWorld other = (BlackjackWorld) obj;
-		return Objects.equals(bet, other.bet) && Objects.equals(dealerHand, other.dealerHand)
-				&& Objects.equals(playerHand, other.playerHand);
-	}
-
-
-	@Override
-	public String toString() {
-		return "BlackjackWorld [dealerHand=" + dealerHand + ", playerHand=" + playerHand + ", bet=" + bet + "]";
-	}
-
+	
 
 
 
@@ -65,6 +43,7 @@ public class BlackjackWorld implements IWorld{
 		this.dealerHand.draw(w);
 		this.playerHand.draw(w);
 		this.bet.draw(w);
+		this.deck.draw(w);
 
 		return w; 
 	}	
@@ -79,6 +58,45 @@ public class BlackjackWorld implements IWorld{
 
 
 		return this;
+	}
+
+
+
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bet, dealerHand, deck, playerHand);
+	}
+
+
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BlackjackWorld other = (BlackjackWorld) obj;
+		return Objects.equals(bet, other.bet) && Objects.equals(dealerHand, other.dealerHand)
+				&& Objects.equals(deck, other.deck) && Objects.equals(playerHand, other.playerHand);
+	}
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "BlackjackWorld [dealerHand=" + dealerHand + ", playerHand=" + playerHand + ", bet=" + bet + ", deck="
+				+ deck + "]";
 	}
 
 
