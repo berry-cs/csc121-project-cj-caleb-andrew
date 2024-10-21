@@ -39,14 +39,17 @@ public class BlackjackWorld implements IWorld{
 	public PApplet draw(PApplet w) { 
 		w.background(255);   // 0 = black, 255 = white
 		w.fill(0,255,0); // solid green
-
+		
+		// adds in table background
+		w.imageMode(w.CENTER);
+        w.image(w.loadImage("table.jpg"), 700, 400);
+        
 		this.dealerHand.draw(w);
 		this.playerHand.draw(w);
 		this.bet.draw(w);
 		this.deck.draw(w);
 		
-		w.imageMode(w.CENTER);
-        w.image(w.loadImage("card back updated.png"), this.dealerHand.loc.getX(), this.dealerHand.loc.getY());
+		
 
 		return w; 
 	}	

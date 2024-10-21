@@ -16,12 +16,12 @@ public class Bet {
 
 	/* draw this bet on the given window at the given location */
 	public void draw(PApplet w) {
-		w.fill(color.getRGB());
-		w.circle(40, 360, 40);
+		w.imageMode(w.CENTER);
+        w.image(w.loadImage("chip.png"), 500, 650);
 
 		w.fill(0);
 		w.textAlign(w.CENTER);
-		w.text(this.value, 40, 365);
+		w.text(this.value, 500, 655);
 
 
 

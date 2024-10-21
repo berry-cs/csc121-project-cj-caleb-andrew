@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import processing.core.PApplet;
 
 /**
@@ -23,9 +25,17 @@ public class Hand implements IWorld {
 		return w;
 	}
 	
+	/** adds the first card from the given deck to the hand */
+	public Hand addCard(Deck d) {
+		return new Hand(new ConsLoC(d.getFirst(), this.cards), this.loc);
+	}
 
+	@Override
+	public String toString() {
+		return "Hand [cards=" + cards + ", loc=" + loc + "]";
+	}
 	
-	
+
 		
 	
 	/*Card card2;

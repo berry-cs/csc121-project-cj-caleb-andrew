@@ -18,18 +18,18 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 	IWorld w;
 
 	public void settings() {
-		this.size(400, 400);
+		this.size(1400, 800);
 	}
 
 	public void setup() {
 		w = new BlackjackWorld (new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'K', false),
 				new ConsLoC(new Card(Color.RED, "Hearts", '5', false),
 						new MTLoC())), 
-				new Posn(200, 50)), 
+				new Posn(700, 150)), 
 				new Hand(new ConsLoC(new Card(Color.BLACK, "Spades", 'T', true),
 						new ConsLoC(new Card(Color.RED, "Diamonds", 'A', true),
 								new MTLoC())),
-						new Posn(250, 325)), new Bet (Color.GREEN, true, 100), new Deck((new ConsLoC(new Card(Color.RED, "Hearts", 'K', false),
+						new Posn(700, 600)), new Bet (Color.GREEN, true, 100), new Deck((new ConsLoC(new Card(Color.RED, "Hearts", 'K', false),
 				new ConsLoC(new Card(Color.RED, "Hearts", '5', false),
 						new MTLoC())))));
 	}

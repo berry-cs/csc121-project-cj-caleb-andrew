@@ -14,6 +14,12 @@ interface ILoC {
 
 	/** adds new random card to list of random cards */
 	// public ILoC randomCard
+	
+	/** returns the first card in a list of cards, or null if the list is empty */
+	Card first();
+	
+	/** returns the rest of the list of cards, or an MTLoC if the list had only one card */
+	ILoC rest();
 }
 
 
@@ -33,6 +39,17 @@ public ??? ilobMethod(...) {
 	/* draws this list on the window */
 	public PApplet drawCards(PApplet w, Posn loc, boolean spread) {
 		return w;
+	}
+	
+	// CAUSING PROBLEMS WITH removeCard() METHOD
+	/** returns the first card in a list of cards, or null if the list is empty */
+	public Card first() {
+		return null;
+	}
+	
+	/** returns the rest of the list of cards, or an MTLoC if the list had only one card */
+	public ILoC rest() {
+		return this;
 	}
 
 	@Override
@@ -66,13 +83,32 @@ class ConsLoC implements ILoC {
 	public PApplet drawCards(PApplet w, Posn loc, boolean spread) {
 		this.first.draw(w, loc);
 		if (spread) {
-			this.rest.drawCards(w, loc.translate(new Posn(10, 10)), spread);
+			this.rest.drawCards(w, loc.translate(new Posn(20, 20)), spread);
 		} else {
 			this.rest.drawCards(w, loc, spread);
 		}
 		return w;
 	}
+	
+	public ILoC remove() {
+		if(this.rest.equals(new MTLoC())) {
+			return new MTLoC();
+		}
+		else {
+			return new ConsLoC(null, this.rest);
+		}
+	}
+	
+	/** returns the first card in a list of cards, or null if the list is empty */
+	public Card first() {
+		return this.first;
+	}
 
+	/** returns the rest of the list of cards, or an MTLoC if the list had only one card */
+	public ILoC rest() {
+		return new ConsLoC(this.rest.first(), this.rest.rest());
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(first, rest);

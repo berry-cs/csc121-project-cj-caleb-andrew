@@ -22,10 +22,18 @@ public class Card implements IWorld {
 
 	/* draw this card on the given window at the given location */
 	public void draw(PApplet w, Posn cardLoc) {
-		w.fill(color.getRGB());
-		w.rectMode(PApplet.CENTER);
-		w.rect(cardLoc.getX(), cardLoc.getY(), 20, 40);
+		//w.fill(color.getRGB());
+		//w.rectMode(PApplet.CENTER);
+		//w.rect(cardLoc.getX(), cardLoc.getY(), 20, 40);
+		w.imageMode(w.CENTER);
+        w.image(w.loadImage("card back updated.png"), cardLoc.getX(), cardLoc.getY());
+
 		
+	}
+
+	@Override
+	public String toString() {
+		return "Card [color=" + color + ", suit=" + suit + ", rank=" + rank + ", faceUp=" + faceUp + "]";
 	}
 	
 	
