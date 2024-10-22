@@ -138,13 +138,13 @@ public class Deck{
 	}
 	
 	/** returns the first card in the deck */
-	public Card getFirst() {
-		return this.deck.first();
+	public Card getFirstCard() {
+		return this.deck.getFirst();
 	}
 	
 	/** returns the deck with the first card removed */
 	public Deck removeCard() {
-		return new Deck(this.deck.rest());
+		return new Deck(this.deck.removeTop());
 	}
 
 

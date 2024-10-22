@@ -16,10 +16,10 @@ interface ILoC {
 	// public ILoC randomCard
 	
 	/** returns the first card in a list of cards, or null if the list is empty */
-	Card first();
+	Card getFirst();
 	
 	/** returns the rest of the list of cards, or an MTLoC if the list had only one card */
-	ILoC rest();
+	ILoC removeTop();
 }
 
 
@@ -41,14 +41,14 @@ public ??? ilobMethod(...) {
 		return w;
 	}
 	
-	// CAUSING PROBLEMS WITH removeCard() METHOD
 	/** returns the first card in a list of cards, or null if the list is empty */
-	public Card first() {
+	public Card getFirst() {
 		return null;
+		// bogus return value, should not ever get to this
 	}
 	
 	/** returns the rest of the list of cards, or an MTLoC if the list had only one card */
-	public ILoC rest() {
+	public ILoC removeTop() {
 		return this;
 	}
 
@@ -90,23 +90,14 @@ class ConsLoC implements ILoC {
 		return w;
 	}
 	
-	public ILoC remove() {
-		if(this.rest.equals(new MTLoC())) {
-			return new MTLoC();
-		}
-		else {
-			return new ConsLoC(null, this.rest);
-		}
+	public ILoC removeTop() {
+		return this.rest;
+	
 	}
 	
 	/** returns the first card in a list of cards, or null if the list is empty */
-	public Card first() {
+	public Card getFirst() {
 		return this.first;
-	}
-
-	/** returns the rest of the list of cards, or an MTLoC if the list had only one card */
-	public ILoC rest() {
-		return new ConsLoC(this.rest.first(), this.rest.rest());
 	}
 	
 	@Override

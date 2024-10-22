@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Objects;
 
 import processing.core.PApplet;
 
@@ -27,13 +28,32 @@ public class Hand implements IWorld {
 	
 	/** adds the first card from the given deck to the hand */
 	public Hand addCard(Deck d) {
-		return new Hand(new ConsLoC(d.getFirst(), this.cards), this.loc);
+		return new Hand(new ConsLoC(d.getFirstCard(), this.cards), this.loc);
 	}
 
 	@Override
 	public String toString() {
 		return "Hand [cards=" + cards + ", loc=" + loc + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cards, loc);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Hand other = (Hand) obj;
+		return Objects.equals(cards, other.cards) && Objects.equals(loc, other.loc);
+	}
+	
+	
 	
 
 		

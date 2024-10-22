@@ -1,9 +1,11 @@
 import java.util.Objects;
 
+
 import processing.core.PApplet;
+import processing.event.KeyEvent;
 
 /** Animation with a blackjack card game
- * Use y or n keys to choose to hit or stand.
+ * Use h or s keys to choose to hit or stand.
  * Use number keys to input bet amount
  * Use mouse clicks to start new game. 
  */
@@ -53,6 +55,22 @@ public class BlackjackWorld implements IWorld{
 
 		return w; 
 	}	
+	
+	/** hits or stands for the player in response to the 'h' and 's' keys
+	 *   'h' = hit (add another card to the player's hand)
+	 *   's' = stand (do not add any more cards) */
+	public IWorld keyPressed(KeyEvent kev) {
+		if(kev.getKey() == 'h') {
+			return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck);
+		}
+		else if(kev.getKey() == 's') {
+			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck);
+		}
+		else {
+			 return this;
+		}
+		
+	}
 
 
 	/** produce an updated state of this world after one time tick */

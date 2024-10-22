@@ -11,7 +11,7 @@ class BlackjackWorldTest {
 
 
 
-    Hand tester = new Hand(new ConsLoC(new Card(Color.RED, "Hearts", '2', false), new MTLoC()), new Posn(100, 100));
+	Hand tester = new Hand(new ConsLoC(new Card(Color.RED, "Hearts", '2', false), new MTLoC()), new Posn(100, 100));
 	Hand test2 = new Hand(new MTLoC(), new Posn(100,100));
 
 	Deck testDeck = new Deck(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false),
@@ -20,6 +20,17 @@ class BlackjackWorldTest {
 							new ConsLoC(new Card(Color.RED, "Diamonds", '5', false),
 									new ConsLoC(new Card(Color.BLACK, "Clubs", '5', false),
 											new MTLoC()))))));
+
+	Hand dealer1 = new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false),
+			(new ConsLoC(new Card(Color.RED, "Diamonds", 'A', false), new MTLoC()))), new Posn(700,200));
+
+	Hand player1 = new Hand(new ConsLoC(new Card(Color.BLACK, "Spades", '7', false),
+			(new ConsLoC(new Card(Color.BLACK, "Clubs", '2', false), new MTLoC()))), new Posn(700,600));
+
+	Bet bet1 = new Bet(Color.RED, true, 100);
+
+
+	BlackjackWorld bjw1 = new BlackjackWorld(dealer1, player1, bet1, testDeck);
 
 
 	// BlackjackWorld w1 = new BlackjackWorld(new Posn(50, 50), new Posn(100, 100));
@@ -33,9 +44,9 @@ class BlackjackWorldTest {
 		//	assertEquals(w3, w3.update());
 	}
 
-	
+
 	// METHODS CURRENTLY NOT WORKING
-	/*
+	
 	@Test
 	void testRemoveCard() {
 		assertEquals(new Deck(new ConsLoC(new Card(Color.RED, "Hearts", '2', false),
@@ -44,18 +55,25 @@ class BlackjackWorldTest {
 										new ConsLoC(new Card(Color.BLACK, "Clubs", '5', false),
 												new MTLoC()))))), testDeck.removeCard());
 	}
-	*/
-	
+	 
 
 	@Test
 	void testAddCard() {
-			assertEquals(new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false), 
-					       new ConsLoC(new Card(Color.RED, "Hearts", '2', false), 
-					    	  new MTLoC())), new Posn(100, 100)), tester.addCard(testDeck));
-			assertEquals(new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false), 
-					       new ConsLoC(new Card(Color.RED, "Hearts", '2', false), 
-					    	  new MTLoC())), new Posn(100, 100)).toString(), tester.addCard(testDeck).toString());
+
+		assertTrue(new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false), new ConsLoC(new Card(Color.RED, "Hearts", '2', false), new MTLoC())), new Posn(100, 100)).equals(tester.addCard(testDeck)));
+		assertEquals(new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false), 
+				new ConsLoC(new Card(Color.RED, "Hearts", '2', false), 
+						new MTLoC())), new Posn(100, 100)), tester.addCard(testDeck));
+		assertEquals(new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false), 
+				new ConsLoC(new Card(Color.RED, "Hearts", '2', false), 
+						new MTLoC())), new Posn(100, 100)).toString(), tester.addCard(testDeck).toString());
 	}
-	
+
+	@Test
+	void testKeyPressed() {
+		// tested interactively, the 'h' key adds another card to the player's hand
+		// and the rest of the keys do not do anything
+	}
+
 
 }

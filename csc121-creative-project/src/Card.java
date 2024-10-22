@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Objects;
 
 import processing.core.PApplet;
 
@@ -34,6 +35,24 @@ public class Card implements IWorld {
 	@Override
 	public String toString() {
 		return "Card [color=" + color + ", suit=" + suit + ", rank=" + rank + ", faceUp=" + faceUp + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(color, faceUp, rank, suit);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		return Objects.equals(color, other.color) && faceUp == other.faceUp && rank == other.rank
+				&& Objects.equals(suit, other.suit);
 	}
 	
 	
