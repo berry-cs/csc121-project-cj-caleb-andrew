@@ -62,7 +62,7 @@ public class Deck{
 																							new ConsLoC(new Card(Color.BLACK, "Spades", 'Q', false),
 																									new ConsLoC(new Card(Color.BLACK, "Spades", 'K', false),
 																											new MTLoC()))))))))))))));
-	/*
+	
 	Deck FullDeck = new Deck(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false),
 			new ConsLoC(new Card(Color.RED, "Hearts", '2', false),
 					new ConsLoC(new Card(Color.RED, "Hearts", '3', false),
@@ -126,9 +126,6 @@ public class Deck{
         w.image(w.loadImage("card back updated.png"), 125, 125);
 	}
 
-
-								
-					
 
 
 
