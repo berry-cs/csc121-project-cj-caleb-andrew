@@ -45,7 +45,7 @@ class BlackjackWorldTest {
 	}
 
 
-	// METHODS CURRENTLY NOT WORKING
+	
 	
 	@Test
 	void testRemoveCard() {
