@@ -26,9 +26,11 @@ public class Hand implements IWorld {
 		return w;
 	}
 	
-	/** adds the first card from the given deck to the hand */
+	/** adds the first card from the given deck to the hand 
+	 *   and turns the card face up 
+	 */
 	public Hand addCard(Deck d) {
-		return new Hand(new ConsLoC(d.getFirstCard(), this.cards), this.loc);
+		return new Hand(new ConsLoC(d.getFirstCard().flipCard(), this.cards), this.loc);
 	}
 
 	@Override

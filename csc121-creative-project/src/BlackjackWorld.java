@@ -61,7 +61,7 @@ public class BlackjackWorld implements IWorld{
 	 *   's' = stand (do not add any more cards) */
 	public IWorld keyPressed(KeyEvent kev) {
 		if(kev.getKey() == 'h') {
-			return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck);
+			return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck.removeCard());
 		}
 		else if(kev.getKey() == 's') {
 			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck);

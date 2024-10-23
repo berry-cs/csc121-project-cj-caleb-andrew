@@ -90,6 +90,9 @@ class ConsLoC implements ILoC {
 		return w;
 	}
 	
+	/**
+	 *  returns the ILoC with the first card removed
+	 */
 	public ILoC removeTop() {
 		return this.rest;
 	

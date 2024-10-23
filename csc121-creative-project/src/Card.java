@@ -52,7 +52,7 @@ public class Card implements IWorld {
 		}
 	}
 
-	/** returns true if the Card is a Spades */
+	/** returns true if the Card is a Spade */
 	public boolean isSpade() {
 		if(this.suit.equals("Spades")) {
 			return true;
@@ -62,7 +62,9 @@ public class Card implements IWorld {
 		}
 	}
 
-	/** draw this card on the given window at the given location */
+	/** draw this card on the given window at the given location,
+	 *   and selects the appropriate image file based on the card
+	 */
 	public void draw(PApplet w, Posn cardLoc) {
 		w.imageMode(w.CENTER);
 		if(this.faceUp) {
@@ -262,6 +264,10 @@ public class Card implements IWorld {
 
 	//	}
 
+	/** returns the card with boolean faceUp = true, to turn the card face up */
+	public Card flipCard() {
+		return new Card(this.color, this.suit, this.rank, true);
+	}
 	@Override
 	public String toString() {
 		return "Card [color=" + color + ", suit=" + suit + ", rank=" + rank + ", faceUp=" + faceUp + "]";
