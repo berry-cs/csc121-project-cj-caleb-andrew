@@ -4,6 +4,9 @@ import java.awt.Color;
 
 
 /* Implement game play logic
+// final static- to set constant so no magic (floating) numbers
+ * used named constant instead of hardcoding
+ * can name all the constants in 1 place in app class
 
 1) Add functionality to move cards from a hand to the "table" or from the deck to a hand.
 2) Maybe design a "Button" class(es) to represent actions that should happen.
