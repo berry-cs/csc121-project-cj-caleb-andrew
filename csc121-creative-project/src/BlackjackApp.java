@@ -16,9 +16,11 @@ import java.awt.Color;
  */
 public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate everywhere in this file
 	IWorld w;
+	private static final int gameWidth = 1400;
+	private static final int gameHeight = 800;
 
 	public void settings() {
-		this.size(1400, 800);
+		this.size(gameWidth, gameHeight);
 	}
 	
 	/* temporary placeholder for the full deck, will develop method to generate 
@@ -90,7 +92,7 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 				new Hand(new ConsLoC(new Card(Color.BLACK, "Spades", 'T', true),
 						new ConsLoC(new Card(Color.RED, "Diamonds", 'A', true),
 								new MTLoC())),
-						new Posn(700, 600)), new Bet (Color.GREEN, true, 100), FullDeck);
+						new Posn(700, 600)), new Bet (Color.GREEN, true, 100), FullDeck, 0);
 	}
 
 

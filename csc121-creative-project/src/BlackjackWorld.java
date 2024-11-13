@@ -3,6 +3,7 @@ import java.util.Objects;
 
 import processing.core.PApplet;
 import processing.event.KeyEvent;
+import processing.event.MouseEvent;
 
 /** Animation with a blackjack card game
  * Use h or s keys to choose to hit or stand.
@@ -15,19 +16,25 @@ public class BlackjackWorld implements IWorld{
 	Bet bet;
 	Deck deck;
 
+	int gameStep;        
+	/*
+	 *  0 = game start
+	 *  1 = player bet input
+	 *  2 = dealing inital cards
+	 *  3 = player action (hit/stand)
+	 *  4 = dealer action
+	 *  5 = game over
+	 */
 
-	// ILoC deck;
-
-	//int gameStep         // -1 - game over; 0 = dealing initial cards; 1 =waiting for player H/S ; ...
 
 
-
-	BlackjackWorld(Hand dealerHand, Hand playerHand, Bet bet, Deck deck) {
+	BlackjackWorld(Hand dealerHand, Hand playerHand, Bet bet, Deck deck, int gameStep) {
 		super();
 		this.dealerHand = dealerHand;
 		this.playerHand = playerHand;
 		this.bet = bet;
 		this.deck = deck;
+		this.gameStep = gameStep;
 	}
 
 
@@ -61,20 +68,62 @@ public class BlackjackWorld implements IWorld{
 	 *   's' = stand (do not add any more cards) */
 	public IWorld keyPressed(KeyEvent kev) {
 		if(kev.getKey() == 'h') {
-			return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck.removeCard());
+			return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck.removeCard(), this.gameStep);
 		}
 		else if(kev.getKey() == 's') {
-			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck);
+			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep);
 		}
 		else {
 			 return this;
 		}
 		
 	}
+	
+	/** produce an updated state of this world after a mouse click event */
+	public IWorld mouseClicked(MouseEvent mev) {
+		return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1);
+	}
 
 
 	/** produce an updated state of this world after one time tick */
 	public IWorld update() { 
+		
+		if(this.gameStep == 0) {
+			// TODO
+			// standard game beginning screen
+			// increment gameStep to 1 on click
+		}
+		
+		else if(this.gameStep == 1) {
+			// TODO
+			// allow bet input from user
+			// increment gameStep to 2 after bet has been input
+		}
+		
+		else if(this.gameStep == 2) {
+			// TODO
+			// shuffle deck and deal initial cards
+			// increment gameStep to 3 once cards have been dealt
+		}
+		
+		else if(this.gameStep == 3) {
+			// TODO
+			// allow key input from user for hit/stand
+			// increment gameStep to 4 if user stands
+			// increment gameStep directly to 5 if the user busts or has blackjack
+		}
+		
+		else if(this.gameStep == 4) {
+			// TODO
+			// dealer action
+			// increment gameStep to 5 once dealer's turn is done
+		}
+		
+		else if(this.gameStep == 5) {
+			// TODO
+			// declare winner/loser, payout, and game over
+			// reset gameStep back to 0 on click
+		}
 
 		// if gameStep is at a stage where the dealer supposed to do something:
 		//      do that
