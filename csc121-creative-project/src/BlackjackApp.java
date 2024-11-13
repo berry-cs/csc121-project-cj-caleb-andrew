@@ -25,11 +25,11 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 	public void settings() {
 		this.size(gameWidth, gameHeight);
 	}
-	
+
 	/* temporary placeholder for the full deck, will develop method to generate 
 	 *  randomly sorted deck later on
 	 */
-	 Deck FullDeck = new Deck(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false),
+	Deck FullDeck = new Deck(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false),
 			new ConsLoC(new Card(Color.RED, "Hearts", '2', false),
 					new ConsLoC(new Card(Color.RED, "Hearts", '3', false),
 							new ConsLoC(new Card(Color.RED, "Hearts", '4', false),
@@ -82,10 +82,7 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 																																																																																																					new ConsLoC(new Card(Color.BLACK, "Spades", 'Q', false),
 																																																																																																							new ConsLoC(new Card(Color.BLACK, "Spades", 'K', false),
 																																																																																																									new MTLoC())))))))))))))))))))))))))))))))))))))))))))))))))))));
-																											
-	
-	
-	
+
 
 	public void setup() {
 		w = new BlackjackWorld (new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'K', false),
