@@ -30,7 +30,7 @@ class BlackjackWorldTest {
 	Bet bet1 = new Bet(Color.RED, true, 100);
 
 
-	BlackjackWorld bjw1 = new BlackjackWorld(dealer1, player1, bet1, testDeck);
+	BlackjackWorld bjw1 = new BlackjackWorld(dealer1, player1, bet1, testDeck, 0);
 
 
 	// BlackjackWorld w1 = new BlackjackWorld(new Posn(50, 50), new Posn(100, 100));
