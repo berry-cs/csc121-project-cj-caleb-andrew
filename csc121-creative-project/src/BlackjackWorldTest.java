@@ -60,7 +60,9 @@ class BlackjackWorldTest {
 	@Test
 	void testAddCard() {
 
-		assertTrue(new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false), new ConsLoC(new Card(Color.RED, "Hearts", '2', false), new MTLoC())), new Posn(100, 100)).equals(tester.addCard(testDeck)));
+		assertTrue(new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false), 
+				new ConsLoC(new Card(Color.RED, "Hearts", '2', false), new MTLoC())), 
+				new Posn(100, 100)).equals(tester.addCard(testDeck)));
 		assertEquals(new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false), 
 				new ConsLoC(new Card(Color.RED, "Hearts", '2', false), 
 						new MTLoC())), new Posn(100, 100)), tester.addCard(testDeck));

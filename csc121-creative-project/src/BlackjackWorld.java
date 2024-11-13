@@ -1,5 +1,6 @@
 import java.util.Objects;
 
+import javax.swing.JOptionPane;
 
 import processing.core.PApplet;
 import processing.event.KeyEvent;
@@ -20,7 +21,7 @@ public class BlackjackWorld implements IWorld{
 	/*
 	 *  0 = game start
 	 *  1 = player bet input
-	 *  2 = dealing inital cards
+	 *  2 = dealing initial cards
 	 *  3 = player action (hit/stand)
 	 *  4 = dealer action
 	 *  5 = game over
@@ -38,7 +39,7 @@ public class BlackjackWorld implements IWorld{
 	}
 
 
-	
+
 
 
 
@@ -48,80 +49,123 @@ public class BlackjackWorld implements IWorld{
 	public PApplet draw(PApplet w) { 
 		w.background(255);   // 0 = black, 255 = white
 		w.fill(0,255,0); // solid green
-		
+
 		// adds in table background
 		w.imageMode(w.CENTER);
-        w.image(w.loadImage("table.jpg"), 700, 400);
-        
-		this.dealerHand.draw(w);
-		this.playerHand.draw(w);
-		this.bet.draw(w);
+		w.image(w.loadImage("table.jpg"), 700, 400);
+
+		w.text("Game Step: " + this.gameStep, 1100, 150);
+		
 		this.deck.draw(w);
 		
+		if(this.gameStep >= 1) {
+			this.bet.draw(w);
+		}
+
+		if(this.gameStep >= 2) {
+			this.dealerHand.draw(w);
+			this.playerHand.draw(w);
+			this.incrementGameStep();
+		}
 		
+		
+		//this.deck.draw(w);
+		
+
+
 
 		return w; 
 	}	
-	
+
 	/** hits or stands for the player in response to the 'h' and 's' keys
 	 *   'h' = hit (add another card to the player's hand)
 	 *   's' = stand (do not add any more cards) */
 	public IWorld keyPressed(KeyEvent kev) {
-		if(kev.getKey() == 'h') {
-			return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck.removeCard(), this.gameStep);
+		if (kev.getKey() == 'Z') {
+			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1);
 		}
-		else if(kev.getKey() == 's') {
-			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep);
+
+
+		if(this.gameStep == 3) {
+			if(kev.getKey() == 'h') {
+				return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck.removeCard(), this.gameStep);
+			}
+			else if(kev.getKey() == 's') {
+				return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1);
+			}
 		}
-		else {
-			 return this;
-		}
-		
+
+
+		return this;
+
 	}
-	
+
 	/** produce an updated state of this world after a mouse click event */
 	public IWorld mouseClicked(MouseEvent mev) {
+		if(this.gameStep == 0) {
+			return incrementGameStep();
+		}
+
+		return this;
+	}
+
+
+	private IWorld incrementGameStep() {
 		return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1);
+	}
+
+	private int getBetAmount() {
+		String msg = "Please enter bet amount: ";
+
+		while (true) {
+			try {
+				String input = JOptionPane.showInputDialog(msg);
+				int amt = Integer.parseInt(input);
+				// check amt is a valid value for a bet ......
+				if (amt >= 0) {
+					return amt;
+				} else {
+					msg = "Amount cannot be negative. Please enter bet amount: ";
+				}
+			} catch ( NumberFormatException e ) {
+				msg = "Invalid number. Please enter bet amount: ";
+			}
+		}
 	}
 
 
 	/** produce an updated state of this world after one time tick */
 	public IWorld update() { 
-		
-		if(this.gameStep == 0) {
-			// TODO
-			// standard game beginning screen
-			// increment gameStep to 1 on click
+
+
+
+		if(this.gameStep == 1) {
+			int amt = getBetAmount();
+			// do what you need to to update the Bet
+			return incrementGameStep();
 		}
-		
-		else if(this.gameStep == 1) {
-			// TODO
-			// allow bet input from user
-			// increment gameStep to 2 after bet has been input
-		}
-		
 		else if(this.gameStep == 2) {
 			// TODO
 			// shuffle deck and deal initial cards
 			// increment gameStep to 3 once cards have been dealt
 		}
-		
+
 		else if(this.gameStep == 3) {
 			// TODO
 			// allow key input from user for hit/stand
 			// increment gameStep to 4 if user stands
 			// increment gameStep directly to 5 if the user busts or has blackjack
 		}
-		
+
 		else if(this.gameStep == 4) {
 			// TODO
-			// dealer action
+			// automated dealer action
 			// increment gameStep to 5 once dealer's turn is done
 		}
-		
+
 		else if(this.gameStep == 5) {
 			// TODO
-			// declare winner/loser, payout, and game over
+			// declare winner/loser, pay out, and game over
 			// reset gameStep back to 0 on click
 		}
 

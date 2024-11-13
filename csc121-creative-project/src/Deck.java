@@ -1,10 +1,12 @@
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 import processing.core.PApplet;
 
 public class Deck{
-	ILoC deck;
+	//ILoC deck;
 	/*
 	Deck HeartsDeck = new Deck(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false),
 			new ConsLoC(new Card(Color.RED, "Hearts", '2', false),
@@ -121,27 +123,53 @@ public class Deck{
 	
 	
 	/* draw this bet on the given window at the given location */
+	
+	
+	ArrayList<Card> cards;
+	
+	
 	public void draw(PApplet w) {
 		w.imageMode(w.CENTER);
         w.image(w.loadImage("card back updated.png"), 125, 125);
 	}
 
+	
 
 
 
 	Deck(ILoC deck) {
 		super();
-		this.deck = deck;
+		this.cards = new ArrayList<Card>();
+		
+		String[] suits = { "Clubs", "Hearts", "Diamonds", "Spades" };
+		String ranks = "A23456789TJQK";
+		
+		for (int s = 0; s < suits.length; s++) {
+			String curSuit = suits[s];
+			
+			for (int i =0; i < ranks.length(); i = i + 1) {
+				char crank = ranks.charAt(i);
+				
+				Card card = new Card(Color.RED, curSuit, crank, false);
+				this.cards.add(card);
+			}
+		}
+		
+		Collections.shuffle(this.cards);
+		
 	}
 	
 	/** returns the first card in the deck */
 	public Card getFirstCard() {
-		return this.deck.getFirst();
+		return this.cards.get(0);
+		//return this.deck.getFirst();
 	}
 	
 	/** returns the deck with the first card removed */
 	public Deck removeCard() {
-		return new Deck(this.deck.removeTop());
+		this.cards.remove(0);
+		return this;
+		//return new Deck(this.deck.removeTop());
 	}
 
 
@@ -152,7 +180,7 @@ public class Deck{
 
 	@Override
 	public String toString() {
-		return "Deck [deck=" + deck + "]";
+		return "Deck [deck=" + cards + "]";
 	}
 
 
@@ -163,7 +191,7 @@ public class Deck{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(deck);
+		return Objects.hash(cards);
 	}
 
 
@@ -181,7 +209,7 @@ public class Deck{
 		if (getClass() != obj.getClass())
 			return false;
 		Deck other = (Deck) obj;
-		return Objects.equals(deck, other.deck);
+		return Objects.equals(cards, other.cards);
 	}
 	
 
