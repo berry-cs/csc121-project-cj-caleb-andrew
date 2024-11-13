@@ -20,7 +20,7 @@ public class BlackjackWorld implements IWorld{
 	/*
 	 *  0 = game start
 	 *  1 = player bet input
-	 *  2 = dealing inital cards
+	 *  2 = dealing initial cards
 	 *  3 = player action (hit/stand)
 	 *  4 = dealer action
 	 *  5 = game over
