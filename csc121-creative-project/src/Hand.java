@@ -8,6 +8,13 @@ import processing.core.PApplet;
  *   but at most 11 cards
  */
 
+
+/*
+ * NEED REDESIGN
+ * deck has been redesigned to use an ArrayList<Card> instead of an ILoC
+ * need to redesign constructor and methods to use ArrayList
+ */
+
 public class Hand implements IWorld {
 	ILoC cards;
 	Posn loc;

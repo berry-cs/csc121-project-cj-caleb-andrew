@@ -29,70 +29,20 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 	/* temporary placeholder for the full deck, will develop method to generate 
 	 *  randomly sorted deck later on
 	 */
-	Deck FullDeck = new Deck(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false),
-			new ConsLoC(new Card(Color.RED, "Hearts", '2', false),
-					new ConsLoC(new Card(Color.RED, "Hearts", '3', false),
-							new ConsLoC(new Card(Color.RED, "Hearts", '4', false),
-									new ConsLoC(new Card(Color.RED, "Hearts", '5', false),
-											new ConsLoC(new Card(Color.RED, "Hearts", '6', false),
-													new ConsLoC(new Card(Color.RED, "Hearts", '7', false),
-															new ConsLoC(new Card(Color.RED, "Hearts", '8', false),
-																	new ConsLoC(new Card(Color.RED, "Hearts", '9', false),
-																			new ConsLoC(new Card(Color.RED, "Hearts", 'T', false),
-																					new ConsLoC(new Card(Color.RED, "Hearts", 'J', false),
-																							new ConsLoC(new Card(Color.RED, "Hearts", 'Q', false),
-																									new ConsLoC(new Card(Color.RED, "Hearts", 'K', false),
-																											new ConsLoC(new Card(Color.RED, "Diamonds", 'A', false),
-																													new ConsLoC(new Card(Color.RED, "Diamonds", '2', false),
-																															new ConsLoC(new Card(Color.RED, "Diamonds", '3', false),
-																																	new ConsLoC(new Card(Color.RED, "Diamonds", '4', false),
-																																			new ConsLoC(new Card(Color.RED, "Diamonds", '5', false),
-																																					new ConsLoC(new Card(Color.RED, "Diamonds", '6', false),
-																																							new ConsLoC(new Card(Color.RED, "Diamonds", '7', false),
-																																									new ConsLoC(new Card(Color.RED, "Diamonds", '8', false),
-																																											new ConsLoC(new Card(Color.RED, "Diamonds", '9', false),
-																																													new ConsLoC(new Card(Color.RED, "Diamonds", 'T', false),
-																																															new ConsLoC(new Card(Color.RED, "Diamonds", 'J', false),
-																																																	new ConsLoC(new Card(Color.RED, "Diamonds", 'Q', false),
-																																																			new ConsLoC(new Card(Color.RED, "Diamonds", 'K', false),
-																																																					new ConsLoC(new Card(Color.BLACK, "Clubs", 'A', false),
-																																																							new ConsLoC(new Card(Color.BLACK, "Clubs", '2', false),
-																																																									new ConsLoC(new Card(Color.BLACK, "Clubs", '3', false),
-																																																											new ConsLoC(new Card(Color.BLACK, "Clubs", '4', false),
-																																																													new ConsLoC(new Card(Color.BLACK, "Clubs", '5', false),
-																																																															new ConsLoC(new Card(Color.BLACK, "Clubs", '6', false),
-																																																																	new ConsLoC(new Card(Color.BLACK, "Clubs", '7', false),
-																																																																			new ConsLoC(new Card(Color.BLACK, "Clubs", '8', false),
-																																																																					new ConsLoC(new Card(Color.BLACK, "Clubs", '9', false),
-																																																																							new ConsLoC(new Card(Color.BLACK, "Clubs", 'T', false),
-																																																																									new ConsLoC(new Card(Color.BLACK, "Clubs", 'J', false),
-																																																																											new ConsLoC(new Card(Color.BLACK, "Clubs", 'Q', false),
-																																																																													new ConsLoC(new Card(Color.BLACK, "Clubs", 'K', false),
-																																																																															new ConsLoC(new Card(Color.BLACK, "Spades", 'A', false),
-																																																																																	new ConsLoC(new Card(Color.BLACK, "Spades", '2', false),
-																																																																																			new ConsLoC(new Card(Color.BLACK, "Spades", '3', false),
-																																																																																					new ConsLoC(new Card(Color.BLACK, "Spades", '4', false),
-																																																																																							new ConsLoC(new Card(Color.BLACK, "Spades", '5', false),
-																																																																																									new ConsLoC(new Card(Color.BLACK, "Spades", '6', false),
-																																																																																											new ConsLoC(new Card(Color.BLACK, "Spades", '7', false),
-																																																																																													new ConsLoC(new Card(Color.BLACK, "Spades", '8', false),
-																																																																																															new ConsLoC(new Card(Color.BLACK, "Spades", '9', false),
-																																																																																																	new ConsLoC(new Card(Color.BLACK, "Spades", 'T', false),
-																																																																																																			new ConsLoC(new Card(Color.BLACK, "Spades", 'J', false),
-																																																																																																					new ConsLoC(new Card(Color.BLACK, "Spades", 'Q', false),
-																																																																																																							new ConsLoC(new Card(Color.BLACK, "Spades", 'K', false),
-																																																																																																									new MTLoC())))))))))))))))))))))))))))))))))))))))))))))))))))));
-
+	Deck FullDeck = new Deck();
 
 	public void setup() {
-		w = new BlackjackWorld (new Hand(new ConsLoC(new Card(Color.RED, "Hearts", 'K', false),
-				new ConsLoC(new Card(Color.RED, "Hearts", '5', false),
-						new MTLoC())), 
-				new Posn(700, 150)), 
-				new Hand(new ConsLoC(new Card(Color.BLACK, "Spades", 'T', true),
-						new ConsLoC(new Card(Color.RED, "Diamonds", 'A', true),
-								new MTLoC())),
-						new Posn(700, 600)), new Bet (Color.GREEN, true, 100), FullDeck, 0);
+		w = new BlackjackWorld (new Hand(new ConsLoC(FullDeck.getCard(0).flipCard(), new ConsLoC(FullDeck.getCard(1), 
+										 new MTLoC())), new Posn(700, 150)), 
+				
+								new Hand(new ConsLoC(FullDeck.getCard(2).flipCard(), new ConsLoC(FullDeck.getCard(3).flipCard(),
+										 new MTLoC())), new Posn(700, 600)),
+								
+								new Bet (Color.GREEN, true, 100),
+								
+								FullDeck,
+								
+								0);
 	}
 
 

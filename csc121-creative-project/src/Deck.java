@@ -64,7 +64,7 @@ public class Deck{
 																							new ConsLoC(new Card(Color.BLACK, "Spades", 'Q', false),
 																									new ConsLoC(new Card(Color.BLACK, "Spades", 'K', false),
 																											new MTLoC()))))))))))))));
-	
+
 	 Deck FullDeck = new Deck(new ConsLoC(new Card(Color.RED, "Hearts", 'A', false),
 			new ConsLoC(new Card(Color.RED, "Hearts", '2', false),
 					new ConsLoC(new Card(Color.RED, "Hearts", '3', false),
@@ -118,58 +118,86 @@ public class Deck{
 																																																																																																					new ConsLoC(new Card(Color.BLACK, "Spades", 'Q', false),
 																																																																																																							new ConsLoC(new Card(Color.BLACK, "Spades", 'K', false),
 																																																																																																									new MTLoC())))))))))))))))))))))))))))))))))))))))))))))))))))));
-																											
-	
-	
-	
+
+
+
+
 	/* draw this bet on the given window at the given location */
-	
-	
+
+
 	ArrayList<Card> deck;
-	
-	
+
+
 	public void draw(PApplet w) {
 		w.imageMode(w.CENTER);
-        w.image(w.loadImage("card back updated.png"), 125, 125);
+		w.image(w.loadImage("card back updated.png"), 125, 125);
 	}
 
-	
 
 
 
-	Deck(ILoC deck) {
+
+	Deck() {
 		super();
 		this.deck = new ArrayList<Card>();
-		
+
 		String[] suits = { "Clubs", "Hearts", "Diamonds", "Spades" };
 		String ranks = "A23456789TJQK";
-		
+
 		for (int s = 0; s < suits.length; s++) {
 			String curSuit = suits[s];
-			
+
 			for (int i =0; i < ranks.length(); i = i + 1) {
 				char crank = ranks.charAt(i);
-				
+
 				Card card = new Card(Color.RED, curSuit, crank, false);
 				this.deck.add(card);
 			}
 		}
-		
+
 		Collections.shuffle(this.deck);
-		
+
 	}
-	
+
+
+	// Overwritten constructor for test cases, will be deleted later
+	Deck(ILoC deck) {
+		super();
+		this.deck = new ArrayList<Card>();
+
+		String[] suits = { "Clubs", "Hearts", "Diamonds", "Spades" };
+		String ranks = "A23456789TJQK";
+
+		for (int s = 0; s < suits.length; s++) {
+			String curSuit = suits[s];
+
+			for (int i =0; i < ranks.length(); i = i + 1) {
+				char crank = ranks.charAt(i);
+
+				Card card = new Card(Color.RED, curSuit, crank, false);
+				this.deck.add(card);
+			}
+		}
+
+		Collections.shuffle(this.deck);
+
+	}
+
 	/** returns the first card in the deck */
 	public Card getFirstCard() {
 		return this.deck.get(0);
 		//return this.deck.getFirst();
 	}
-	
+
 	/** returns the deck with the first card removed */
 	public Deck removeCard() {
 		this.deck.remove(0);
 		return this;
 		//return new Deck(this.deck.removeTop());
+	}
+	
+	public Card getCard(int index) {
+		return this.deck.get(index);
 	}
 
 
@@ -211,7 +239,7 @@ public class Deck{
 		Deck other = (Deck) obj;
 		return Objects.equals(deck, other.deck);
 	}
-	
+
 
 
 }
