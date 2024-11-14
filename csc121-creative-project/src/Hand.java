@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import processing.core.PApplet;
@@ -16,20 +17,25 @@ import processing.core.PApplet;
  */
 
 public class Hand implements IWorld {
-	ILoC cards;
+	ArrayList<Card> cards;
 	Posn loc;
 	
-	Hand(ILoC cards, Posn loc) {
+	Hand(ArrayList<Card> cards, Posn loc) {
 		this.cards = cards;
 		this.loc = loc;
 	}
+
 	
 	/** draw a picture of the cards at this hand's (x,y)
 	 * 
 	 */
 	public PApplet draw(PApplet w) { 
-		cards.drawCards(w, this.loc, true);
-		//drawCard(w, this.card1, this.loc);
+		for(int i = 0; i < cards.size(); i++) {
+			if(i == 0) {
+				cards.get(i).draw(w, loc);
+			}
+			cards.get(i).draw(w, loc.translate(new Posn(i*20, i*20)));
+		}
 		return w;
 	}
 	
@@ -37,7 +43,8 @@ public class Hand implements IWorld {
 	 *   and turns the card face up 
 	 */
 	public Hand addCard(Deck d) {
-		return new Hand(new ConsLoC(d.getFirstCard().flipCard(), this.cards), this.loc);
+		cards.addFirst(d.getFirstCard().flipCard());
+		return this;
 	}
 
 	@Override

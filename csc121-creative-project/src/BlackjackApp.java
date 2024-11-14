@@ -1,6 +1,9 @@
 import processing.core.*;
 import processing.event.*;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 
 /* Implement game play logic
@@ -30,13 +33,17 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 	 *  randomly sorted deck later on
 	 */
 	Deck FullDeck = new Deck();
+	
+	ArrayList<Card> d1 = new ArrayList<Card>(Arrays.asList(FullDeck.getCard(0).flipCard(), FullDeck.getCard(1)));
+	
+	Hand dealer = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard(0).flipCard(), FullDeck.getCard(1))), new Posn(700, 150));
+	
+	Hand player = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard(2).flipCard(), FullDeck.getCard(3).flipCard())), new Posn(700, 600));
 
 	public void setup() {
-		w = new BlackjackWorld (new Hand(new ConsLoC(FullDeck.getCard(0).flipCard(), new ConsLoC(FullDeck.getCard(1), 
-										 new MTLoC())), new Posn(700, 150)), 
+		w = new BlackjackWorld (dealer, 
 				
-								new Hand(new ConsLoC(FullDeck.getCard(2).flipCard(), new ConsLoC(FullDeck.getCard(3).flipCard(),
-										 new MTLoC())), new Posn(700, 600)),
+								player,
 								
 								new Bet (Color.GREEN, true, 100),
 								

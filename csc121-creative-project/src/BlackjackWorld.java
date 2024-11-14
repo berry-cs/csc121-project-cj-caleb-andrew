@@ -91,7 +91,10 @@ public class BlackjackWorld implements IWorld{
 				return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck.removeCard(), this.gameStep);
 			}
 			else if(kev.getKey() == 's') {
-				return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1);
+				//dealerHand.cards.get(1).flipCard();
+				//gameStep++;
+				return incrementGameStep();
+				//return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1);
 			}
 		}
 
@@ -160,6 +163,7 @@ public class BlackjackWorld implements IWorld{
 		else if(this.gameStep == 4) {
 			// TODO
 			// automated dealer action
+			this.dealerHand.cards.get(1).flipCard();
 			// increment gameStep to 5 once dealer's turn is done
 		}
 
