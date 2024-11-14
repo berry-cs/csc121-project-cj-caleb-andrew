@@ -125,7 +125,7 @@ public class Deck{
 	/* draw this bet on the given window at the given location */
 	
 	
-	ArrayList<Card> cards;
+	ArrayList<Card> deck;
 	
 	
 	public void draw(PApplet w) {
@@ -139,7 +139,7 @@ public class Deck{
 
 	Deck(ILoC deck) {
 		super();
-		this.cards = new ArrayList<Card>();
+		this.deck = new ArrayList<Card>();
 		
 		String[] suits = { "Clubs", "Hearts", "Diamonds", "Spades" };
 		String ranks = "A23456789TJQK";
@@ -151,23 +151,23 @@ public class Deck{
 				char crank = ranks.charAt(i);
 				
 				Card card = new Card(Color.RED, curSuit, crank, false);
-				this.cards.add(card);
+				this.deck.add(card);
 			}
 		}
 		
-		Collections.shuffle(this.cards);
+		Collections.shuffle(this.deck);
 		
 	}
 	
 	/** returns the first card in the deck */
 	public Card getFirstCard() {
-		return this.cards.get(0);
+		return this.deck.get(0);
 		//return this.deck.getFirst();
 	}
 	
 	/** returns the deck with the first card removed */
 	public Deck removeCard() {
-		this.cards.remove(0);
+		this.deck.remove(0);
 		return this;
 		//return new Deck(this.deck.removeTop());
 	}
@@ -180,7 +180,7 @@ public class Deck{
 
 	@Override
 	public String toString() {
-		return "Deck [deck=" + cards + "]";
+		return "Deck [deck=" + deck + "]";
 	}
 
 
@@ -191,7 +191,7 @@ public class Deck{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cards);
+		return Objects.hash(deck);
 	}
 
 
@@ -209,7 +209,7 @@ public class Deck{
 		if (getClass() != obj.getClass())
 			return false;
 		Deck other = (Deck) obj;
-		return Objects.equals(cards, other.cards);
+		return Objects.equals(deck, other.deck);
 	}
 	
 
