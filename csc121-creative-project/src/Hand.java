@@ -17,7 +17,7 @@ import processing.core.PApplet;
  */
 
 public class Hand implements IWorld {
-	ArrayList<Card> cards;
+	public ArrayList<Card> cards;
 	Posn loc;
 	
 	Hand(ArrayList<Card> cards, Posn loc) {

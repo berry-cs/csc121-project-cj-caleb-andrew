@@ -158,30 +158,17 @@ public class Deck{
 		Collections.shuffle(this.deck);
 
 	}
-
-
-	// Overwritten constructor for test cases, will be deleted later
-	Deck(ILoC deck) {
-		super();
-		this.deck = new ArrayList<Card>();
-
-		String[] suits = { "Clubs", "Hearts", "Diamonds", "Spades" };
-		String ranks = "A23456789TJQK";
-
-		for (int s = 0; s < suits.length; s++) {
-			String curSuit = suits[s];
-
-			for (int i =0; i < ranks.length(); i = i + 1) {
-				char crank = ranks.charAt(i);
-
-				Card card = new Card(Color.RED, curSuit, crank, false);
-				this.deck.add(card);
-			}
-		}
-
-		Collections.shuffle(this.deck);
-
+	
+	
+	/**
+	 * Test Constructor, will not be called in-game
+	 * @param deck
+	 */
+	Deck(ArrayList<Card> deck) {
+		this.deck = deck;
 	}
+
+
 
 	/** returns the first card in the deck */
 	public Card getFirstCard() {
