@@ -19,7 +19,7 @@ public class Bet {
 		w.imageMode(w.CENTER);
         w.image(w.loadImage("chip.png"), 500, 650);
 
-		w.textAlign(w.CENTER);
+		w.textAlign(w.LEFT);
 		w.text("Bet: $" + this.value, 450, 600);
 
 

@@ -74,7 +74,8 @@ public class BlackjackWorld implements IWorld{
 		if(this.gameStep >= 2) {
 			this.dealerHand.draw(w);
 			this.playerHand.draw(w);
-			w.textSize(28);
+			w.textSize(30);
+			w.textAlign(w.CENTER);
 		//	w.fill(255,255,255);
 			w.text("Player Value: " + this.playerHand.total, 925, 600);
 			//this.incrementGameStep();
