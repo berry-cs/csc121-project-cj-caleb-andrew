@@ -1,4 +1,7 @@
+import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.swing.JOptionPane;
@@ -165,7 +168,23 @@ public class BlackjackWorld implements IWorld{
 			return incrementGameStep();
 		}
 		if(this.gameStep == 5) {
-			this.gameStep = 0;
+			Deck FullDeck = new Deck();
+			
+			//ArrayList<Card> d1 = new ArrayList<Card>(Arrays.asList(FullDeck.getCard(0).flipCard(), FullDeck.getCard(1)));
+			
+			Hand dealer = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard().flipCard(), FullDeck.getCard())), new Posn(700, 150));
+			
+			Hand player = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard().flipCard(), FullDeck.getCard().flipCard())), new Posn(700, 600));
+			
+			return new BlackjackWorld (dealer, 
+					
+					player,
+					
+					new Bet (Color.GREEN, true, 100),
+					
+					FullDeck,
+					
+					0);
 		}
 
 		return this;
