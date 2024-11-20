@@ -183,8 +183,10 @@ public class Deck{
 		//return new Deck(this.deck.removeTop());
 	}
 	
-	public Card getCard(int index) {
-		return this.deck.get(index);
+	public Card getCard() {
+		Card res = this.deck.get(0);
+		this.deck.remove(0);
+		return res;
 	}
 
 

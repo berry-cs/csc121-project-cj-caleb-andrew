@@ -40,6 +40,7 @@ class BlackjackWorldTest {
 	
 	testRemoveCard(testDeck);
 	testAddCard(tester, testDeck);
+	testFlipCard(tester);
 
 	}
 	// BlackjackWorld w1 = new BlackjackWorld(new Posn(50, 50), new Posn(100, 100));
@@ -76,6 +77,10 @@ class BlackjackWorldTest {
 	void testKeyPressed() {
 		// tested interactively, the 'h' key adds another card to the player's hand
 		// and the rest of the keys do not do anything
+	}
+	
+	void testFlipCard(Hand tester) {
+		assertEquals(new Card(Color.RED, "Hearts", '2', true), tester.getCards().get(0).flipCard());
 	}
 
 

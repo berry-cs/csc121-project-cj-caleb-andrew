@@ -34,11 +34,11 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 	 */
 	Deck FullDeck = new Deck();
 	
-	ArrayList<Card> d1 = new ArrayList<Card>(Arrays.asList(FullDeck.getCard(0).flipCard(), FullDeck.getCard(1)));
+	//ArrayList<Card> d1 = new ArrayList<Card>(Arrays.asList(FullDeck.getCard(0).flipCard(), FullDeck.getCard(1)));
 	
-	Hand dealer = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard(0).flipCard(), FullDeck.getCard(1))), new Posn(700, 150));
+	Hand dealer = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard().flipCard(), FullDeck.getCard())), new Posn(700, 150));
 	
-	Hand player = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard(2).flipCard(), FullDeck.getCard(3).flipCard())), new Posn(700, 600));
+	Hand player = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard().flipCard(), FullDeck.getCard().flipCard())), new Posn(700, 600));
 
 	public void setup() {
 		w = new BlackjackWorld (dealer, 

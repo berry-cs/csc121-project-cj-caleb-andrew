@@ -19,13 +19,15 @@ import processing.core.PApplet;
 public class Hand implements IWorld {
 	public ArrayList<Card> cards;
 	Posn loc;
-	
+	int total; // represents total value of the cards in the hand
+
 	Hand(ArrayList<Card> cards, Posn loc) {
 		this.cards = cards;
 		this.loc = loc;
+		total = totalHandVal(cards);
 	}
 
-	
+
 	/** draw a picture of the cards at this hand's (x,y)
 	 * 
 	 */
@@ -38,13 +40,33 @@ public class Hand implements IWorld {
 		}
 		return w;
 	}
-	
+
 	/** adds the first card from the given deck to the hand 
 	 *   and turns the card face up 
 	 */
 	public Hand addCard(Deck d) {
-		cards.addFirst(d.getFirstCard().flipCard());
+		Card add = d.getCard();
+		if (add.value() == 11 && (total + 11 > 21)) { //it's an ace
+			total = total + 1; //ace adds as a one to not end the game
+		} else {
+			total = total + add.value();
+		}
+		cards.addFirst(add.flipCard());
 		return this;
+	}
+	
+	
+	/**
+	 * computes the total value of all given cards in the hand
+	 * @param cards
+	 * @return
+	 */
+	public int totalHandVal (ArrayList<Card> cards) {
+		int result = 0;
+		for(int i = 0; i < cards.size(); i++) {
+			result = result + cards.get(i).value();
+		}
+		return result;
 	}
 
 	@Override
@@ -68,12 +90,15 @@ public class Hand implements IWorld {
 		Hand other = (Hand) obj;
 		return Objects.equals(cards, other.cards) && Objects.equals(loc, other.loc);
 	}
-	
-	
-	
 
-		
-	
+	public ArrayList<Card> getCards() {
+		return this.cards;
+	}
+
+
+
+
+
 	/*Card card2;
 	Card card3;
 	Card card4;
@@ -84,8 +109,8 @@ public class Hand implements IWorld {
 	Card card9;
 	Card card10;
 	Card card11;*/
-	
-	
+
+
 
 }
 

@@ -263,10 +263,58 @@ public class Card implements IWorld {
 
 
 	//	}
+	
+	/* return the integer value of the card (for total in Hand class) */
+	public int value() {
+		if(this.rank =='2') {
+			return 2;
+		}
+		else if(this.rank =='3') {
+			return 3;
+		}
+		else if(this.rank =='4') {
+			return 4;
+		}
+		else if(this.rank =='5') {
+			return 5;
+		}
+		else if(this.rank =='6') {
+			return 6;
+		}
+		else if(this.rank =='7') {
+			return 7;
+		}
+		else if(this.rank =='8') {
+			return 8;
+		}
+		else if(this.rank =='9') {
+			return 9;
+		}
+		else if(this.rank =='T') {
+			return 10;
+		}
+		else if(this.rank =='J') {
+			return 10;
+		}
+		else if(this.rank =='Q') {
+			return 10;
+		}
+		else if(this.rank =='K') {
+			return 10;
+		}
+		else if(this.rank =='A') {
+			return 11;
+		}
+		else {
+			return -1;   // should not get to this
+		}
+	}
 
 	/** returns the card with boolean faceUp = true, to turn the card face up */
 	public Card flipCard() {
-		return new Card(this.color, this.suit, this.rank, true);
+		this.faceUp = true;
+		//return new Card(this.color, this.suit, this.rank, true);
+		return this;
 	}
 	@Override
 	public String toString() {
