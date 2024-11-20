@@ -19,8 +19,8 @@ public class Bet {
 		w.imageMode(PApplet.CENTER);
         w.image(w.loadImage("chip.png"), 500, 650);
 
-		w.textAlign(PApplet.LEFT);
-		w.text("Bet: $" + this.value, 450, 600);
+		w.textAlign(PApplet.RIGHT);
+		w.text("Bet: $" + this.value, 600, 600);
 
 
 

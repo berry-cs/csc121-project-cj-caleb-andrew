@@ -72,7 +72,7 @@ public class BlackjackWorld implements IWorld{
 
 		w.textAlign(PApplet.CENTER);
 		w.textFont(betFont);
-		w.text("Game Step: " + this.gameStep, 1200, 150);
+		//w.text("Game Step: " + this.gameStep, 1200, 150);
 
 		w.text("Bank: " + this.bank, 1200, 700);
 
@@ -80,8 +80,11 @@ public class BlackjackWorld implements IWorld{
 
 		if(this.getGameStep() >= 1) {
 			w.image(w.loadImage("table.jpg"), 700, 400);
-			w.text("Game Step: " + this.gameStep, 1200, 150);
+		//	w.text("Game Step: " + this.gameStep, 1200, 150);
 			w.text("Bank: " + this.bank, 1200, 700);
+			if(this.getBank() == 0) {
+				w.text("ALL IN", 500, 550);
+			}
 			this.deck.draw(w);
 			this.bet.draw(w);
 		}
@@ -260,14 +263,12 @@ public class BlackjackWorld implements IWorld{
 			return incrementGameStep();
 		}
 		else if(this.gameStep == 2) {
-			// TODO
 			// shuffle deck and deal initial cards
 			// increment gameStep to 3 once cards have been dealt
 			return incrementGameStep();
 		}
 
 		else if(this.gameStep == 3) {
-			// TODO
 			if(this.playerHand.total() >= 21) { // if the player gets blackjack or busts, go to end game
 				incrementGameStep();
 				dealerHand.getCards().get(1).flipCard();
@@ -279,7 +280,6 @@ public class BlackjackWorld implements IWorld{
 		}
 
 		else if(this.gameStep == 4) {
-			// TODO
 			// automated dealer action
 			if(this.dealerHand.total() > 21) { // if the dealer busts
 				return incrementGameStep();
@@ -294,7 +294,6 @@ public class BlackjackWorld implements IWorld{
 		}
 
 		else if(this.gameStep == 5) {
-			// TODO
 
 			// declare winner/loser, pay out, and game over
 			// reset gameStep back to 0 on click
