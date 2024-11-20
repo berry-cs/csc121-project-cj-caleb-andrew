@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
@@ -54,7 +55,11 @@ public class BlackjackWorld implements IWorld{
 		//	w.background(255);   // 0 = black, 255 = white
 		w.fill(255,255,255); // solid green
 		
+		PFont betFont;
+		betFont = w.createFont("PixelatedEleganceRegular-ovyAA.ttf", 30);
 		
+		PFont valueFont;
+		valueFont = w.createFont("PixelatedEleganceRegular-ovyAA.ttf", 33);
 		
 
 		// adds in table background
@@ -62,14 +67,13 @@ public class BlackjackWorld implements IWorld{
 		w.image(w.loadImage("table game start.png"), 700, 400);
 
 
+		w.textFont(betFont);
 		w.text("Game Step: " + this.gameStep, 1200, 150);
-
 
 
 
 		if(this.gameStep >= 1) {
 			w.image(w.loadImage("table.jpg"), 700, 400);
-			w.textFont(w.createFont("Times New Roman", 18));
 			w.text("Game Step: " + this.gameStep, 1200, 150);
 			this.deck.draw(w);
 			this.bet.draw(w);
@@ -78,16 +82,21 @@ public class BlackjackWorld implements IWorld{
 		if(this.gameStep >= 2) {
 			this.dealerHand.draw(w);
 			this.playerHand.draw(w);
-			w.textSize(30);
+		//	w.textSize(30);
 			w.textAlign(PApplet.CENTER);
 		//	w.fill(255,255,255);
-			w.textFont(w.createFont("Times New Roman", 40));
-			w.text("Player Value: " + this.playerHand.total(), 925, 600);
+			w.textFont(valueFont);
+			w.text("Player Value:", 1050, 525);
+			w.textSize(42);
+			w.text(this.playerHand.total(), 1050, 575);
 			//this.incrementGameStep();
 		}
 
 		if(this.gameStep >= 4) {
-			w.text("Dealer Value: " + this.dealerHand.total(), 925, 200);
+			w.textFont(valueFont);
+			w.text("Dealer Value:", 1050, 200);
+			w.textSize(42);
+			w.text(this.dealerHand.total(), 1050, 250);
 			//this.dealerHand.cards.get(1).flipCard();
 			//this.dealerHand.draw(w);
 			//this.incrementGameStep();
