@@ -151,12 +151,6 @@ public class BlackjackWorld implements IWorld{
 			w.text("GAME OVER", 700, 400);
 			
 		}
-
-		//this.deck.draw(w);
-
-
-
-
 		return w; 
 	}	
 
