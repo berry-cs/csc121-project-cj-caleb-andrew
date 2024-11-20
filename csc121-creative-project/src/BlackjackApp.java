@@ -3,7 +3,6 @@ import processing.event.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 
 /* Implement game play logic
@@ -49,7 +48,9 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 								
 								FullDeck,
 								
-								0);
+								0,
+								
+								500);
 	}
 
 

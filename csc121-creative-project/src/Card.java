@@ -9,10 +9,10 @@ import processing.core.PApplet;
  * represents a playing card in a deck
  */
 public class Card implements IWorld {
-	Color color;
-	String suit;
-	char rank;			// 'T' means 10
-	boolean faceUp;
+	private Color color;
+	private String suit;
+	private char rank;			// 'T' means 10
+	private boolean faceUp;
 
 	Card(Color color, String suit, char rank, boolean faceUp) {
 		this.color = color;
@@ -66,7 +66,7 @@ public class Card implements IWorld {
 	 *   and selects the appropriate image file based on the card
 	 */
 	public void draw(PApplet w, Posn cardLoc) {
-		w.imageMode(w.CENTER);
+		w.imageMode(PApplet.CENTER);
 		if(this.faceUp) {
 			if(this.isHeart()) {
 				if(this.rank =='2') {
@@ -337,6 +337,46 @@ public class Card implements IWorld {
 		Card other = (Card) obj;
 		return Objects.equals(color, other.color) && faceUp == other.faceUp && rank == other.rank
 				&& Objects.equals(suit, other.suit);
+	}
+
+
+	public Color getColor() {
+		return color;
+	}
+
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+
+	public String getSuit() {
+		return suit;
+	}
+
+
+	public void setSuit(String suit) {
+		this.suit = suit;
+	}
+
+
+	public char getRank() {
+		return rank;
+	}
+
+
+	public void setRank(char rank) {
+		this.rank = rank;
+	}
+
+
+	public boolean isFaceUp() {
+		return faceUp;
+	}
+
+
+	public void setFaceUp(boolean faceUp) {
+		this.faceUp = faceUp;
 	}
 
 

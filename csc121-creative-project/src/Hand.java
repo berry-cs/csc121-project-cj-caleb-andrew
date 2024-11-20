@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -108,6 +107,31 @@ public class Hand implements IWorld {
 
 	public ArrayList<Card> getCards() {
 		return this.cards;
+	}
+
+
+	public Posn getLoc() {
+		return loc;
+	}
+
+
+	public void setLoc(Posn loc) {
+		this.loc = loc;
+	}
+
+
+	public int getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+
+	public void setCards(ArrayList<Card> cards) {
+		this.cards = cards;
 	}
 
 

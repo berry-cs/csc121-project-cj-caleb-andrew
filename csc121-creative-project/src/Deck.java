@@ -10,11 +10,11 @@ public class Deck{
 	/* draw this bet on the given window at the given location */
 
 
-	ArrayList<Card> deck;
+	private ArrayList<Card> deck;
 
 
 	public void draw(PApplet w) {
-		w.imageMode(w.CENTER);
+		w.imageMode(PApplet.CENTER);
 		w.image(w.loadImage("card back updated.png"), 125, 125);
 	}
 
@@ -116,6 +116,18 @@ public class Deck{
 			return false;
 		Deck other = (Deck) obj;
 		return Objects.equals(deck, other.deck);
+	}
+
+
+
+	public ArrayList<Card> getDeck() {
+		return deck;
+	}
+
+
+
+	public void setDeck(ArrayList<Card> deck) {
+		this.deck = deck;
 	}
 
 
