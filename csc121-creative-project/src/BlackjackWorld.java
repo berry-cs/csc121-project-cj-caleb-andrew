@@ -80,7 +80,7 @@ public class BlackjackWorld implements IWorld{
 
 		if(this.getGameStep() >= 1) {
 			w.image(w.loadImage("table.jpg"), 700, 400);
-		//	w.text("Game Step: " + this.gameStep, 1200, 150);
+			//	w.text("Game Step: " + this.gameStep, 1200, 150);
 			w.text("Bank: " + this.bank, 1200, 700);
 			if(this.getBank() == 0) {
 				w.text("ALL IN", 500, 550);
@@ -144,12 +144,12 @@ public class BlackjackWorld implements IWorld{
 				w.text("Stand-Off! It's a tie!", 700, 400);
 			}
 		}
-		
+
 		if(this.getGameStep() == 6 && this.getBank() == 0) {
 			w.textSize(130);
 			w.fill(255,0,0);
 			w.text("GAME OVER", 700, 400);
-			
+
 		}
 		return w; 
 	}	
@@ -181,7 +181,36 @@ public class BlackjackWorld implements IWorld{
 
 		return this;
 
+
 	}
+
+/*
+	public IWorld keyPressed(KeyEvent kev) {
+		if (kev.getKey() == 'Z') {
+			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1, this.bank);
+		}
+
+		if(this.gameStep == 3) {
+			System.out.println("current key pressed: " + kev.getKey());
+			if(kev.getKey() == 'h') {
+				System.out.println("game step: " + this.gameStep);
+				return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck, this.gameStep, this.bank);
+			}
+			else if(kev.getKey() == 's') {
+				System.out.println("dealer second card before flipping: " + dealerHand.getCards().get(1).toString());   //temporary, for debugging
+				dealerHand.getCards().get(1).flipCard();
+				System.out.println("dealer second card after flipping: " + dealerHand.getCards().get(1).toString());   //temporary, for debugging
+				//gameStep++;
+				return incrementGameStep();
+				//return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1);
+			}
+		}
+
+
+		return this;
+	}
+	
+	*/
 
 	/** produce an updated state of this world after a mouse click event */
 	public IWorld mouseClicked(MouseEvent mev) {
@@ -448,7 +477,7 @@ public class BlackjackWorld implements IWorld{
 
 
 	public void setBank(int bank) {
-		
+
 		if(this.playerHand.total() > 21) {
 			//this.bank = this.bank;
 		}
@@ -470,9 +499,9 @@ public class BlackjackWorld implements IWorld{
 		else if(this.playerHand.total() == this.dealerHand.total()) {
 			this.bank = (int) (this.bank + this.bet.getValue());
 		}
-		
-		
-		
+
+
+
 	}
 
 
