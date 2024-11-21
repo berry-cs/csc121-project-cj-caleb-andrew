@@ -46,34 +46,29 @@ public class BlackjackWorld implements IWorld{
 		this.bank = bank;
 	}
 
-
-
-
-
-
-	/** draw a picture of the cards at this world's (x,y)
-	 * 
+	/** 
+	 * draw a picture of the cards at this world's (x,y)
 	 */
 	public PApplet draw(PApplet w) { 
-		//	w.background(255);   // 0 = black, 255 = white
-		w.fill(255,255,255); // solid white
+		w.fill(255,255,255); // white text
 
+		// creating a font for the bet
 		PFont betFont;
 		betFont = w.createFont("PixelatedEleganceRegular-ovyAA.ttf", 30);
 
+		// creating a font for the player and dealer values
 		PFont valueFont;
 		valueFont = w.createFont("PixelatedEleganceRegular-ovyAA.ttf", 33);
 
 
-		// adds in table background
+		// loads game start image
 		w.imageMode(PApplet.CENTER);
 		w.image(w.loadImage("table game start.png"), 700, 400);
 
 
+		// drawing the bank value on the start screen
 		w.textAlign(PApplet.CENTER);
 		w.textFont(betFont);
-		//w.text("Game Step: " + this.gameStep, 1200, 150);
-
 		w.text("Bank: " + this.bank, 1200, 700);
 
 
@@ -92,14 +87,11 @@ public class BlackjackWorld implements IWorld{
 		if(this.getGameStep() >= 2) {
 			this.dealerHand.draw(w);
 			this.playerHand.draw(w);
-			//	w.textSize(30);
 			w.textAlign(PApplet.CENTER);
-			//	w.fill(255,255,255);
 			w.textFont(valueFont);
 			w.text("Player Value:", 1050, 525);
 			w.textSize(42);
 			w.text(this.playerHand.total(), 1050, 575);
-			//this.incrementGameStep();
 		}
 
 		if(this.getGameStep() >= 4) {
@@ -107,14 +99,10 @@ public class BlackjackWorld implements IWorld{
 			w.text("Dealer Value:", 1050, 200);
 			w.textSize(42);
 			w.text(this.dealerHand.total(), 1050, 250);
-			//this.dealerHand.cards.get(1).flipCard();
-			//this.dealerHand.draw(w);
-			//this.incrementGameStep();
 		}
 
 		if(this.getGameStep() >= 5) {
 			w.textSize(40);
-			//w.fill(255,255,255);
 			if(this.playerHand.total() > 21) {
 				w.text("Bust! You lose!", 700, 400);
 				w.text("You lost $" + this.bet.getValue() + ".00", 700, 500);
@@ -149,7 +137,6 @@ public class BlackjackWorld implements IWorld{
 			w.textSize(130);
 			w.fill(255,0,0);
 			w.text("GAME OVER", 700, 400);
-
 		}
 		return w; 
 	}	
@@ -172,19 +159,13 @@ public class BlackjackWorld implements IWorld{
 				System.out.println("dealer second card before flipping: " + dealerHand.getCards().get(1).toString());   //temporary, for debugging
 				dealerHand.getCards().get(1).flipCard();
 				System.out.println("dealer second card after flipping: " + dealerHand.getCards().get(1).toString());   //temporary, for debugging
-				//gameStep++;
 				return incrementGameStep();
-				//return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1);
 			}
 		}
-
-
 		return this;
-
-
 	}
 
-/*
+	/*
 	public IWorld keyPressed(KeyEvent kev) {
 		if (kev.getKey() == 'Z') {
 			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1, this.bank);
@@ -209,46 +190,35 @@ public class BlackjackWorld implements IWorld{
 
 		return this;
 	}
-	
-	*/
+
+	 */
 
 	/** produce an updated state of this world after a mouse click event */
 	public IWorld mouseClicked(MouseEvent mev) {
+		// begins the game on click, asks for bet input
 		if(this.gameStep == 0) {
 			return incrementGameStep();
 		}
+		// restarts the game on click after winnings have been updated
 		if(this.gameStep == 6) {
 			Deck FullDeck = new Deck();
-
-			//ArrayList<Card> d1 = new ArrayList<Card>(Arrays.asList(FullDeck.getCard(0).flipCard(), FullDeck.getCard(1)));
 
 			Hand dealer = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard().flipCard(), FullDeck.getCard())), new Posn(700, 150));
 
 			Hand player = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard().flipCard(), FullDeck.getCard().flipCard())), new Posn(700, 600));
 
-			return new BlackjackWorld (dealer, 
-
-					player,
-
-					new Bet (Color.GREEN, true, 100),
-
-					FullDeck,
-
-					0,
-
-					this.bank
-					);
+			return new BlackjackWorld (dealer, player, new Bet (Color.GREEN, true, 100), FullDeck, 0, this.bank);
 		}
-
 		return this;
 	}
 
-
+	/* increments the gameStep by 1 and returns the updated world */
 	private IWorld incrementGameStep() {
 		this.gameStep = gameStep + 1;
 		return this;
 	}
 
+	/* asks for user input for a bet amount, and checks that it is a valid amount */
 	private int getBetAmount() {
 		String msg = "Please enter bet amount: ";
 
@@ -279,20 +249,23 @@ public class BlackjackWorld implements IWorld{
 
 
 		if(this.gameStep == 1) {
+			// gets bet input, sets the bet value, updates the bank value, and increments to step 2
 			int amt = getBetAmount();
 			this.bet.setValue(amt);
 			this.bank = this.bank - amt;
-			// do what you need to to update the Bet
 			return incrementGameStep();
 		}
 		else if(this.gameStep == 2) {
+			// completely automated step
 			// shuffle deck and deal initial cards
 			// increment gameStep to 3 once cards have been dealt
 			return incrementGameStep();
 		}
 
 		else if(this.gameStep == 3) {
-			if(this.playerHand.total() >= 21) { // if the player gets blackjack or busts, go to end game
+			// player's turn
+			// if the player gets blackjack or busts, go to end game (step 5)
+			if(this.playerHand.total() >= 21) { 
 				incrementGameStep();
 				dealerHand.getCards().get(1).flipCard();
 				return incrementGameStep();
@@ -304,32 +277,23 @@ public class BlackjackWorld implements IWorld{
 
 		else if(this.gameStep == 4) {
 			// automated dealer action
-			if(this.dealerHand.total() > 21) { // if the dealer busts
+			if(this.dealerHand.total() > 21) { // if the dealer busts, go to step 5
 				return incrementGameStep();
 			}
-			else if(this.dealerHand.total() >= 17) {  // if the dealer is dealt 17 or more, he must stand
+			else if(this.dealerHand.total() >= 17) {  // if the dealer is dealt 17 or more, he must stand and go to step 5
 				return incrementGameStep();
 			}
-			else {
+			else {  // the dealer has 16 or less and must hit until one of the above criteria are satisfied
 				return new BlackjackWorld(this.dealerHand.addCard(this.deck), this.playerHand, this.bet, this.deck, this.gameStep, this.bank);
 			}
 			// increment gameStep to 5 once dealer's turn is done
 		}
 
 		else if(this.gameStep == 5) {
-
-			// declare winner/loser, pay out, and game over
-			// reset gameStep back to 0 on click
-
+			// declare winner/loser, update bank value, and increment to game over (step 6)
 			this.setBank(this.bet.getValue());
 			return incrementGameStep();
 		}
-
-		// if gameStep is at a stage where the dealer supposed to do something:
-		//      do that
-		//      advance gameStep to the next number 
-
-
 		return this;
 	}
 
@@ -475,7 +439,10 @@ public class BlackjackWorld implements IWorld{
 
 
 
-
+	/* sets the bank value based on win/loss
+	 * if the player wins, they win 2x their initial bet
+	 * if the player gets blackjack (21), they win 2.5x their initial bet
+	 * if the player loses, they do not win anything and their bank value does not change (bet value has already been subtracted) */
 	public void setBank(int bank) {
 
 		if(this.playerHand.total() > 21) {
@@ -499,9 +466,6 @@ public class BlackjackWorld implements IWorld{
 		else if(this.playerHand.total() == this.dealerHand.total()) {
 			this.bank = (int) (this.bank + this.bet.getValue());
 		}
-
-
-
 	}
 
 
