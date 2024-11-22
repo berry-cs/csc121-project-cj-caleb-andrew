@@ -5,26 +5,23 @@ import java.util.Objects;
 
 import processing.core.PApplet;
 
+/**
+ * represents a deck of cards
+ */
 public class Deck{
-	
-	/* draw this bet on the given window at the given location */
-
-
 	private ArrayList<Card> deck;
-
 
 	public void draw(PApplet w) {
 		w.imageMode(PApplet.CENTER);
 		w.image(w.loadImage("card back updated.png"), 125, 125);
 	}
 
-
-
 	Deck() {
 		this(true);
 	}
 	
 
+	/* generates a full 52 card deck and shuffles it */ 
 	Deck(boolean randomize) {
 		super();
 		this.deck = new ArrayList<Card>();

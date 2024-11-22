@@ -1,9 +1,6 @@
 import java.awt.Color;
 import java.util.Objects;
-
 import processing.core.PApplet;
-
-
 
 /**
  * represents a playing card in a deck
@@ -252,17 +249,6 @@ public class Card implements IWorld {
 			w.image(w.loadImage("card back updated.png"), cardLoc.getX(), cardLoc.getY());
 		}
 	}
-
-	/* draw this card on the given window at the given location */
-	//	public void draw(PApplet w, Posn cardLoc) {
-	//w.fill(color.getRGB());
-	//w.rectMode(PApplet.CENTER);
-	//w.rect(cardLoc.getX(), cardLoc.getY(), 20, 40);
-	//	w.imageMode(w.CENTER);
-	//    w.image(w.loadImage("card back updated.png"), cardLoc.getX(), cardLoc.getY());
-
-
-	//	}
 	
 	/* return the integer value of the card (for total in Hand class) */
 	public int value() {
@@ -313,7 +299,6 @@ public class Card implements IWorld {
 	/** returns the card with boolean faceUp = true, to turn the card face up */
 	public Card flipCard() {
 		this.faceUp = true;
-		//return new Card(this.color, this.suit, this.rank, true);
 		return this;
 	}
 	@Override
@@ -381,7 +366,3 @@ public class Card implements IWorld {
 
 
 }
-
-
-//  1) make method for getting random card
-//  2) 

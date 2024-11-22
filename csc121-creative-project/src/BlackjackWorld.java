@@ -1,4 +1,9 @@
 import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -21,7 +26,9 @@ public class BlackjackWorld implements IWorld{
 	private Bet bet;
 	private Deck deck;
 
-	private int gameStep;        
+	private int gameStep;   
+
+	//private PrintWriter pw;
 	/*
 	 *  0 = game start
 	 *  1 = player bet input
@@ -44,6 +51,9 @@ public class BlackjackWorld implements IWorld{
 		this.deck = deck;
 		this.gameStep = gameStep;
 		this.bank = bank;
+
+
+
 	}
 
 	/** 
@@ -150,48 +160,33 @@ public class BlackjackWorld implements IWorld{
 		}
 
 		if(this.gameStep == 3) {
-			System.out.println("current key pressed: " + kev.getKey());
-			if(kev.getKey() == 'h') {
+
+			System.out.println("current key pressed: " + kev.getKey());    // temporary, for debugging
+
+			switch (kev.getKey()) {
+			case 'h':
 				System.out.println("game step: " + this.gameStep);
-				return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck, this.gameStep, this.bank);
-			}
-			else if(kev.getKey() == 's') {
+				this.playerHand.addCard(this.deck);
+				break;
+			case 's':
 				System.out.println("dealer second card before flipping: " + dealerHand.getCards().get(1).toString());   //temporary, for debugging
 				dealerHand.getCards().get(1).flipCard();
 				System.out.println("dealer second card after flipping: " + dealerHand.getCards().get(1).toString());   //temporary, for debugging
-				return incrementGameStep();
+				this.incrementGameStep();
+				break;
+			}
+		}
+
+		if(this.gameStep == 6) {
+			if(kev.getKey() == 'w') {
+				//pop up and get name
+				String name = getName();
+				saveGame(name);
 			}
 		}
 		return this;
 	}
 
-	/*
-	public IWorld keyPressed(KeyEvent kev) {
-		if (kev.getKey() == 'Z') {
-			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1, this.bank);
-		}
-
-		if(this.gameStep == 3) {
-			System.out.println("current key pressed: " + kev.getKey());
-			if(kev.getKey() == 'h') {
-				System.out.println("game step: " + this.gameStep);
-				return new BlackjackWorld(this.dealerHand, this.playerHand.addCard(this.deck), this.bet, this.deck, this.gameStep, this.bank);
-			}
-			else if(kev.getKey() == 's') {
-				System.out.println("dealer second card before flipping: " + dealerHand.getCards().get(1).toString());   //temporary, for debugging
-				dealerHand.getCards().get(1).flipCard();
-				System.out.println("dealer second card after flipping: " + dealerHand.getCards().get(1).toString());   //temporary, for debugging
-				//gameStep++;
-				return incrementGameStep();
-				//return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1);
-			}
-		}
-
-
-		return this;
-	}
-
-	 */
 
 	/** produce an updated state of this world after a mouse click event */
 	public IWorld mouseClicked(MouseEvent mev) {
@@ -238,6 +233,21 @@ public class BlackjackWorld implements IWorld{
 				}
 			} catch ( NumberFormatException e ) {
 				msg = "Invalid number. Please enter bet amount: ";
+			}
+		}
+	}
+
+	/* asks for user input for a bet amount, and checks that it is a valid amount */
+	private String getName() {
+		String msg = "Please enter your name: ";
+
+		while (true) {
+			String input = JOptionPane.showInputDialog(msg);
+			if (input.equals("")) {
+				return "Unknown";
+			}
+			else {
+				return input;
 			}
 		}
 	}
@@ -298,7 +308,32 @@ public class BlackjackWorld implements IWorld{
 	}
 
 
+	/*
+	 * saves the users name and bank balance to a text file
+	 */
+	public void saveGame(String name) {
 
+		try {
+			FileWriter fw = new FileWriter(new File("results.txt"), true); // true enables appending
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println("" + name + " $" + this.getBank());
+			pw.close();
+
+		}  catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * loads the users name and bank balance from a text file
+	 */
+	public void loadGame() {
+
+	}
+
+	//	public void WriteToFile(PrintWriter pw, String line) {
+	//		pw.println(line);
+	//	}
 
 
 

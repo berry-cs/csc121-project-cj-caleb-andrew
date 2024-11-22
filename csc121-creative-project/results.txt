@@ -1,3 +1,6 @@
-750  CJ Whaley
-900
-
+1000 CJ
+0 CJ
+0 Mickey
+Savannah $1000
+N/A $1000
+Unknown $0
