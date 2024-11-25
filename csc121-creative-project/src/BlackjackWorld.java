@@ -1,12 +1,12 @@
 import java.awt.Color;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -40,8 +40,13 @@ public class BlackjackWorld implements IWorld{
 	 */
 
 	private int bank;
+	
+	private Leaderboard lb = new Leaderboard();
 
 
+	public BlackjackWorld(Scanner sc) {
+		this.bank = sc.nextInt();
+	}
 
 	BlackjackWorld(Hand dealerHand, Hand playerHand, Bet bet, Deck deck, int gameStep, int bank) {
 		super();
@@ -70,21 +75,46 @@ public class BlackjackWorld implements IWorld{
 		PFont valueFont;
 		valueFont = w.createFont("PixelatedEleganceRegular-ovyAA.ttf", 33);
 
+		// creating a font for the player and dealer values
+		PFont smallFont;
+		smallFont = w.createFont("PixelatedEleganceRegular-ovyAA.ttf", 22);
+
 
 		// loads game start image
 		w.imageMode(PApplet.CENTER);
 		w.image(w.loadImage("table game start.png"), 700, 400);
+		w.textFont(valueFont);
+		w.textAlign(PApplet.CENTER);
+		w.fill(202,202,202);
+		w.text("Or press L to load a saved game.", 700, 650);
 
 
 		// drawing the bank value on the start screen
 		w.textAlign(PApplet.CENTER);
 		w.textFont(betFont);
+		w.fill(255,255,255);
 		w.text("Bank: " + this.bank, 1200, 700);
 
 
+		
+		if(this.getGameStep() >= 0) {
+			w.textFont(betFont);
+			w.text("Leaderboard", 150, 450);
+			w.textFont(smallFont);
+			w.text(this.lb.getLb().get(0).getName() + " $" + this.lb.getLb().get(0).getBank(), 150, 500);
+			w.text(this.lb.getLb().get(1).getName() + " $" + this.lb.getLb().get(1).getBank(), 150, 550);
+			w.text(this.lb.getLb().get(2).getName() + " $" + this.lb.getLb().get(2).getBank(), 150, 600);
+		}
 
 		if(this.getGameStep() >= 1) {
 			w.image(w.loadImage("table.jpg"), 700, 400);
+			w.textFont(betFont);
+			w.text("Leaderboard", 150, 450);
+			w.textFont(smallFont);
+			w.text(this.lb.getLb().get(0).getName() + " $" + this.lb.getLb().get(0).getBank(), 150, 500);
+			w.text(this.lb.getLb().get(1).getName() + " $" + this.lb.getLb().get(1).getBank(), 150, 550);
+			w.text(this.lb.getLb().get(2).getName() + " $" + this.lb.getLb().get(2).getBank(), 150, 600);
+			w.textFont(betFont);
 			//	w.text("Game Step: " + this.gameStep, 1200, 150);
 			w.text("Bank: " + this.bank, 1200, 700);
 			if(this.getBank() == 0) {
@@ -97,11 +127,18 @@ public class BlackjackWorld implements IWorld{
 		if(this.getGameStep() >= 2) {
 			this.dealerHand.draw(w);
 			this.playerHand.draw(w);
+			w.image(w.loadImage("d chip .png"), 575, 175);
 			w.textAlign(PApplet.CENTER);
 			w.textFont(valueFont);
-			w.text("Player Value:", 1050, 525);
+			w.text("Player Value:", 1050, 550);
 			w.textSize(42);
-			w.text(this.playerHand.total(), 1050, 575);
+			w.text(this.playerHand.total(), 1050, 600);
+		}
+
+		if(this.getGameStep() == 3) {
+			w.textFont(betFont);
+			w.text(" press 'h' to hit ", 700, 375);
+			w.text(" press 's' to stand ", 700, 425);
 		}
 
 		if(this.getGameStep() >= 4) {
@@ -114,33 +151,40 @@ public class BlackjackWorld implements IWorld{
 		if(this.getGameStep() >= 5) {
 			w.textSize(40);
 			if(this.playerHand.total() > 21) {
-				w.text("Bust! You lose!", 700, 400);
+				w.text("Bust! You lose!", 700, 350);
 				w.text("You lost $" + this.bet.getValue() + ".00", 700, 500);
 			}
 			else if(this.playerHand.total() == 21) {
 				//w.text("Blackjack! You win!", 700, 400);
-				w.image(w.loadImage("bj1 tp.png"), 700, 400);
+				w.image(w.loadImage("blackjack win.png"), 700, 400);
 				w.text("You won $" + this.bet.getValue()*2.5 + "0", 700, 500);
 			}
 			else if(this.dealerHand.total() > 21) {
-				w.text("Dealer bust! You win!", 700, 400);
+				w.text("Dealer bust! You win!", 700, 350);
 				w.text("You won $" + this.bet.getValue()*2 + ".00", 700, 500);
 			}
 			else if(this.dealerHand.total() == 21) {
-				w.text("Dealer blackjack! You lose!", 700, 400);
+				w.text("Dealer blackjack! You lose!", 700, 350);
 				w.text("You lost $" + this.bet.getValue() + ".00", 700, 500);
 			}
 			else if(this.playerHand.total() > this.dealerHand.total()) {
-				w.text("You beat the dealer! You win!", 700, 400);
+				w.text("You beat the dealer! You win!", 700, 350);
 				w.text("You won $" + this.bet.getValue()*2 + ".00", 700, 500);
 			}
 			else if(this.dealerHand.total() > this.playerHand.total()) {
-				w.text("The dealer beat you! You lose!", 700, 400);
+				w.text("The dealer beat you! You lose!", 700, 350);
 				w.text("You lost $" + this.bet.getValue() + ".00", 700, 500);
 			}
 			else if(this.playerHand.total() == this.dealerHand.total()) {
 				w.text("Stand-Off! It's a tie!", 700, 400);
 			}
+		}
+
+		if(this.getGameStep() == 6) {
+			w.fill(205,205,205);
+			w.textFont(smallFont);
+			w.text("Click anywhere to start a new hand", 1075, 70);
+			w.text("Or press 'w' to walk away (save game)", 1075, 100);
 		}
 
 		if(this.getGameStep() == 6 && this.getBank() == 0) {
@@ -159,7 +203,13 @@ public class BlackjackWorld implements IWorld{
 			return new BlackjackWorld(this.dealerHand, this.playerHand, this.bet, this.deck, this.gameStep + 1, this.bank);
 		}
 
-		if(this.gameStep == 3) {
+		if(this.getGameStep() == 0) {
+			if(Character.toLowerCase(kev.getKey()) == 'l') {
+				loadGame();
+			}
+		}
+
+		if(this.getGameStep() == 3) {
 
 			System.out.println("current key pressed: " + kev.getKey());    // temporary, for debugging
 
@@ -177,11 +227,13 @@ public class BlackjackWorld implements IWorld{
 			}
 		}
 
-		if(this.gameStep == 6) {
+		if(this.getGameStep() == 6) {
 			if(kev.getKey() == 'w') {
 				//pop up and get name
 				String name = getName();
-				saveGame(name);
+				lb.updateLB(new Score(this.getBank() , name));
+				lb.saveLB();
+				//saveGame(name);
 			}
 		}
 		return this;
@@ -301,7 +353,7 @@ public class BlackjackWorld implements IWorld{
 
 		else if(this.gameStep == 5) {
 			// declare winner/loser, update bank value, and increment to game over (step 6)
-			this.setBank(this.bet.getValue());
+			this.updateBank(this.bet.getValue());
 			return incrementGameStep();
 		}
 		return this;
@@ -316,8 +368,10 @@ public class BlackjackWorld implements IWorld{
 		try {
 			FileWriter fw = new FileWriter(new File("results.txt"), true); // true enables appending
 			PrintWriter pw = new PrintWriter(fw);
-			pw.println("" + name + " $" + this.getBank());
+			pw.println("" + this.getBank() + " " + name);
 			pw.close();
+			this.lb.updateLB(new Score(this.getBank(), name));
+			System.out.println(lb);
 
 		}  catch (IOException e) {
 			e.printStackTrace();
@@ -328,12 +382,41 @@ public class BlackjackWorld implements IWorld{
 	 * loads the users name and bank balance from a text file
 	 */
 	public void loadGame() {
+		String targetName = this.getName();
+		boolean found = false;
+
+		try {
+			Scanner sc = new Scanner(new File("results.txt"));
+
+			while (sc.hasNextInt()) {
+				int bank =  sc.nextInt();
+				String name = sc.nextLine().trim();
+				System.out.println("Loaded " + name);
+
+				if (name.equals(targetName)) {
+					this.setBank( bank );
+					found = true;
+					//break;
+				}
+			}			
+			/*
+			System.out.println("" + Integer.parseInt(sc.next()));
+			String[] arr = sc.next().split(" ");
+			this.setBank(Integer.parseInt(arr[0]));
+			 */
+
+			if (!found) {
+				JOptionPane.showMessageDialog(null, targetName + " not found.");
+			}
+
+
+			sc.close();
+		} catch (IOException exp) {
+			System.out.println("Problem loading game: " + exp.getMessage());
+		}
 
 	}
 
-	//	public void WriteToFile(PrintWriter pw, String line) {
-	//		pw.println(line);
-	//	}
 
 
 
@@ -472,13 +555,17 @@ public class BlackjackWorld implements IWorld{
 
 
 
+	public void setBank(int bank) {
+		this.bank = bank;
+	}
+
 
 
 	/* sets the bank value based on win/loss
 	 * if the player wins, they win 2x their initial bet
 	 * if the player gets blackjack (21), they win 2.5x their initial bet
 	 * if the player loses, they do not win anything and their bank value does not change (bet value has already been subtracted) */
-	public void setBank(int bank) {
+	public void updateBank(int bank) {
 
 		if(this.playerHand.total() > 21) {
 			//this.bank = this.bank;
