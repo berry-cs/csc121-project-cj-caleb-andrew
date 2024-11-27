@@ -7,7 +7,7 @@
 600 Joey
 600 test1
 501 test5
-500 Andrew
+550 Andrew
 440 test6
 410 test9
 400 t
