@@ -6,7 +6,7 @@ public class Score {
 
 	private int bank;
 	private String name;
-	
+
 	Score(int bank, String name) {
 		super();
 		this.bank = bank;
@@ -26,6 +26,6 @@ public class Score {
 		return name;
 	}
 
-	
-	
+
+
 }

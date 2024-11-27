@@ -27,13 +27,13 @@ public class BlackjackApp extends PApplet {	// <----- 1. rename AppTemplate ever
 	public void settings() {
 		this.size(gameWidth, gameHeight);
 	}
-	
+
 	// creates a full deck of 52 cards and shuffles it
 	Deck FullDeck = new Deck();
-	
+
 	// creates the dealer hand by taking the top two cards from the deck and flipping only one of them over
 	Hand dealer = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard().flipCard(), FullDeck.getCard())), new Posn(700, 150));
-	
+
 	// creates the player hand by taking the next two cards from the deck and flipping both cards over
 	Hand player = new Hand(new ArrayList<Card>(Arrays.asList(FullDeck.getCard().flipCard(), FullDeck.getCard().flipCard())), new Posn(700, 600));
 

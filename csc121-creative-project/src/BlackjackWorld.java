@@ -40,7 +40,7 @@ public class BlackjackWorld implements IWorld{
 	 */
 
 	private int bank;
-	
+
 	private Leaderboard lb = new Leaderboard();
 
 
@@ -96,7 +96,7 @@ public class BlackjackWorld implements IWorld{
 		w.text("Bank: " + this.bank, 1200, 700);
 
 
-		
+
 		if(this.getGameStep() >= 0) {
 			w.textFont(betFont);
 			w.text("Leaderboard", 150, 450);
