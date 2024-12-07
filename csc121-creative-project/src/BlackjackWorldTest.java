@@ -78,7 +78,7 @@ class BlackjackWorldTest {
         lb.updateLB(newScore);
         assertTrue(lb.getLb().contains(newScore));
     }
-}}
+}
 =======
 
 
