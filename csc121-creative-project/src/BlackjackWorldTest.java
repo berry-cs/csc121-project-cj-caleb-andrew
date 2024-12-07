@@ -70,6 +70,7 @@ class BlackjackWorldTest {
         assertNotEquals(deck1, deck2); // Shuffled decks should not be equal
     }
 
+<<<<<<< Updated upstream
     @Test
     void testLeaderboardUpdate() {
         Leaderboard lb = new Leaderboard();
@@ -77,4 +78,36 @@ class BlackjackWorldTest {
         lb.updateLB(newScore);
         assertTrue(lb.getLb().contains(newScore));
     }
+}}
+=======
+
+
+	void testFlipCard(Hand tester) {
+		assertEquals(new Card(Color.RED, "Hearts", '2', true), tester.getCards().get(0).flipCard());
+	}
+
 }
+
+
+/*
+	void testLoadGame() {
+
+	}
+
+	void testSaveGame() {
+
+	}
+
+	void testGetName() {
+
+	}
+
+	void testMouseClicked (){
+
+	}
+
+}
+
+
+ */
+>>>>>>> Stashed changes
