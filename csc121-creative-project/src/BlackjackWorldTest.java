@@ -39,11 +39,10 @@ class BlackjackWorldTest {
 	}
 
 	void testAddCard(Hand tester, Deck testDeck) {
-		assertTrue(new Hand(new ArrayList<Card>(Arrays.asList(new Card[] {new Card(Color.RED, "Hearts", '2', true), 
-				new Card(Color.RED, "Hearts", '2', false)})), 
+		assertTrue(new Hand(new ArrayList<Card>(Arrays.asList(new Card[] {new Card(Color.RED, "Hearts", '2', false), 
+				new Card(Color.RED, "Hearts", '2', true)})), 
 				new Posn(100, 100)).equals(tester.addCard(testDeck)));
 	}
-
 	@Test
 	void testKeyPressed() {
 		// tested interactively, the 'h' key adds another card to the player's hand
